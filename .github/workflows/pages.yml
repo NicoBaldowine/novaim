@@ -22,7 +22,10 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-          cache-dependency-path: branding-2/package-lock.json
+          cache-dependency-path: |
+            branding-1/package-lock.json
+            branding-2/package-lock.json
+      - run: npm ci --prefix branding-1
       - run: npm ci --prefix branding-2
       - uses: actions/configure-pages@v5
       - run: node scripts/build-site.mjs
