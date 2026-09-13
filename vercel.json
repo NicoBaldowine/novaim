@@ -12,6 +12,16 @@
       "permanent": false
     },
     {
+      "source": "/branding-1/",
+      "destination": "/branding1/",
+      "permanent": true
+    },
+    {
+      "source": "/branding-2/",
+      "destination": "/branding2/",
+      "permanent": true
+    },
+    {
       "source": "/branding-1/:path*",
       "destination": "/branding1/:path*",
       "permanent": true
