@@ -636,3 +636,46 @@ main .particle-duality .duality-canvas { max-width: 1300px; }
 /* Intro captions remain a single centered line at every viewport width. */
 .intro-stories { width: min(1100px, 92vw); max-width: none; }
 .intro-story p { white-space: nowrap; font-size: clamp(8px, 1.8vw, 16px); }
+
+/* Supplied vector lockup: preserve the original 671:70 proportions. */
+.wordmark.supplied-wordmark { display: inline-flex; width: 6.36em; max-width: 100%; gap: 0; }
+.wordmark.supplied-wordmark .supplied-logo { display: block; width: 100%; height: auto; flex: none; }
+.logo-construction { max-width: 82%; }
+.logo-construction .logo-guides { --guide-inset: 0px; --guide-diameter: 15.7%; }
+.logo-construction .guide-circle { aspect-ratio: 1; height: auto; }
+.logo-construction .guide-bottom { top: 100%; }
+
+/* Full-bleed type statement over a free-moving particle field. */
+main .principles.section.particle-duality { position: relative; isolation: isolate; overflow: hidden; padding: 0; min-height: 75svh; background: #e8eae9; }
+main .particle-duality .duality-canvas { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; pointer-events: none; }
+.particle-wordmark { position: relative; z-index: 1; width: min(88%, 1300px); color: #080a09; }
+.particle-wordmark .wordmark.supplied-wordmark { width: 100%; }
+.particle-wordmark .supplied-logo { overflow: hidden; }
+@media (max-width: 700px) { main .principles.section.particle-duality { min-height: 55svh; } }
+
+/* Construction guides follow the vector ink, not the line box. */
+.bento-logo .supplied-wordmark { width: 5.8em; }
+.logo-construction { line-height: 0; }
+.logo-construction .guide-top { top: var(--mark-top); }
+.logo-construction .guide-bottom { top: var(--mark-bottom); bottom: auto; }
+.logo-construction .guide-left { left: var(--mark-left); }
+.logo-construction .guide-mark-end { left: var(--mark-right); }
+.logo-construction .guide-circle { left: var(--mark-left); top: var(--mark-top); width: calc(var(--mark-right) - var(--mark-left)); height: calc(var(--mark-bottom) - var(--mark-top)); }
+
+/* One vector coordinate system keeps every construction line on the logo. */
+.logo-construction .vector-construction { position: absolute; inset: 0; display: block; width: 100%; height: 100%; overflow: visible; pointer-events: none; opacity: 0; transition: opacity .5s ease; }
+.vector-construction path { stroke-width: .75px; vector-effect: non-scaling-stroke; }
+.bento-logo:hover .vector-construction, .bento-logo:focus-visible .vector-construction { opacity: .3; }
+@media (prefers-reduced-motion: reduce) { .logo-construction .vector-construction { transition: none; } }
+
+.assembling-wordmark { height: min(54svh, 500px); display: grid; place-items: center; --wordmark-ink: 0; }
+.assembling-wordmark > .wordmark { opacity: var(--wordmark-ink); }
+.wordmark-assembly { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .assembling-wordmark > .wordmark { opacity: 1; }.wordmark-assembly { display: none; } }
+
+/* Exact supplied symbol and wordmark on the social application. */
+.intro-mark { color: white; }
+.social-official-avatar { position: absolute; left: 19.14%; top: 38.12%; width: 18.34%; height: 18.34%; display: grid; place-items: center; border: 1px solid #777; border-radius: 9%; background: #080a09; color: white; }
+.social-official-avatar .brand-mark { width: 68%; height: auto; }
+.social-official-name { position: absolute; left: 18.9%; top: 58.5%; width: 19%; height: 5.6%; display: flex; align-items: center; background: #080a09; color: white; }
+.social-official-name .wordmark.supplied-wordmark { width: 100%; }

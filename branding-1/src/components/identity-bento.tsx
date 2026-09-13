@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { Wordmark } from "./brand-mark";
+import { BrandMark, Wordmark } from "./brand-mark";
 import { SignalField } from "./signal-field";
 
 const themes = ["white", "carbon", "forest", "plum", "mint", "lilac", "gray"];
@@ -13,32 +13,14 @@ export function IdentityBento() {
   const root = useRef<HTMLDivElement>(null);
   const [colors, setColors] = useState([0, 2, 5, 3]);
   const [slide, setSlide] = useState(0);
+  const [bounds, setBounds] = useState<{left:number;right:number;top:number;bottom:number}[]>([]);
   useEffect(() => {
-    const container = root.current?.querySelector<HTMLElement>(".logo-construction");
-    const label = container?.querySelector<HTMLElement>(".wordmark > span");
-    if (!container || !label) return;
-    let disposed = false;
-    const measure = () => {
-      if (disposed) return;
-      const style = getComputedStyle(label);
-      const ctx = document.createElement("canvas").getContext("2d");
-      if (!ctx) return;
-      ctx.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
-      ctx.letterSpacing = style.letterSpacing;
-      const full = ctx.measureText("NovaIM");
-      const capital = ctx.measureText("N");
-      const rect = label.getBoundingClientRect();
-      const parent = container.getBoundingClientRect();
-      const baseline = rect.top - parent.top + (rect.height - full.fontBoundingBoxAscent - full.fontBoundingBoxDescent) / 2 + full.fontBoundingBoxAscent;
-      container.style.setProperty("--text-left", `${rect.left - parent.left - full.actualBoundingBoxLeft}px`);
-      container.style.setProperty("--text-right", `${rect.left - parent.left + full.actualBoundingBoxRight}px`);
-      container.style.setProperty("--text-top", `${baseline - capital.actualBoundingBoxAscent}px`);
-      container.style.setProperty("--text-bottom", `${baseline + capital.actualBoundingBoxDescent}px`);
-    };
-    const observer = new ResizeObserver(measure);
-    observer.observe(label);
-    void document.fonts.ready.then(measure);
-    return () => { disposed = true; observer.disconnect(); };
+    const logo = root.current?.querySelector<SVGSVGElement>(".logo-construction .supplied-logo");
+    if (!logo) return;
+    setBounds(["mark", "type"].map(part => {
+      const box = logo.querySelector<SVGGElement>(`[data-logo-part="${part}"]`)!.getBBox();
+      return { left: box.x, right: box.x + box.width, top: box.y, bottom: box.y + box.height };
+    }));
   }, []);
 
   const [study, setStudy] = useState(0);
@@ -70,7 +52,14 @@ export function IdentityBento() {
   const orbitColor = colors[3] % 4;
   return <div className="identity-bento living-bento" ref={root}>
     <div className={`bento-logo logo-theme-${themes[colors[0]]}`} tabIndex={0} aria-label="NovaIM logo construction">
-      <div className="logo-construction"><Wordmark /><div className="logo-guides" aria-hidden="true"><i className="guide-top" /><i className="guide-middle" /><i className="guide-bottom" /><i className="guide-left" /><i className="guide-mark-end" /><i className="guide-type-start" /><i className="guide-right" /><span className="guide-circle" /><span className="guide-text-box" /></div></div>
+      <div className="logo-construction"><Wordmark />
+        <svg className="vector-construction" viewBox="0 0 671 70" fill="none" stroke="currentColor" aria-hidden="true">
+          {bounds.map((box, i) => <g key={i}>
+            <path d={`M ${box.left} -90 V 219 M ${box.right} -90 V 219`} />
+            <path d={i === 0 ? `M -100 ${box.top} H 771 M -100 ${box.bottom} H 771` : `M ${box.left} ${box.top} H ${box.right} M ${box.left} ${box.bottom} H ${box.right}`} />
+          </g>)}
+        </svg>
+      </div>
 
     </div>
     <div className={`bento-signal palette-theme-${themes[signalColor]}`}><SignalField mode={studies[study]} ink={inks[signalColor]} interactive /></div>
@@ -98,7 +87,9 @@ export function IdentityBento() {
       <div className="bento-orbit-crop"><SignalField mode="positioning" ink={inks[orbitColor]} /></div>
     </div>
     <div className="bento-mockup bento-social-profile">
-      <Image src="/mockups/novaim-social-profile-v5.png" alt="NovaIM social profile with a dotted sphere cover, constellation avatar, and Connecting points. Creating possibilities." fill sizes="(max-width: 700px) 88vw, 30vw" />
+      <Image src="/mockups/novaim-social-profile-v5.png" alt="NovaIM social profile with a dotted sphere cover, official NovaIM avatar, and Connecting points. Creating possibilities." fill sizes="(max-width: 700px) 88vw, 30vw" />
+      <div className="social-official-avatar"><BrandMark /></div>
+      <div className="social-official-name"><Wordmark textOnly /></div>
     </div>
     <div className="bento-mockup bento-business-cards">
       <Image src="/mockups/novaim-laptop-hero-v3.png" alt="A black laptop displaying NovaIM brand positioning and a subtle grayscale particle sphere, against a dark forest-green background." fill sizes="(max-width: 700px) 88vw, 60vw" />

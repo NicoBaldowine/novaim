@@ -1,17 +1,23 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { ParticleWordmark } from "./particle-wordmark";
 
-// Both surfaces share the positioning sphere geometry; hover dissolves the pair.
+// Keep the two original volumes suspended partway through their dissolution.
 const random = (n: number) => { const v = Math.sin(n * 127.1 + 311.7) * 43758.5453; return v - Math.floor(v); };
 const particles = Array.from({ length: 6000 }, (_, i) => {
-  const sphere = i < 3000 ? 0 : 1;
   const n = i % 3000;
   const z = 1 - 2 * (n + .5) / 3000;
   const angle = n * 2.3999632297;
-  const radius = 1;
-  const ring = Math.sqrt(1 - z * z) * radius;
-  return { sphere, x: Math.cos(angle) * ring, y: Math.sin(angle) * ring, z: z * radius, seed: n * .731, scatterX: (random(i + 1) * 2 - 1) * 1.7, scatterY: (random(i + 9001) * 2 - 1) * 1.05 };
+  const ring = Math.sqrt(1 - z * z);
+  return {
+    sphere: i < 3000 ? -1 : 1,
+    x: Math.cos(angle) * ring, y: Math.sin(angle) * ring, z,
+    scatterX: (random(i + 1) * 2 - 1) * 1.7,
+    scatterY: (random(i + 9001) * 2 - 1) * 1.05,
+    seed: random(i + 18001) * Math.PI * 2,
+    depth: random(i + 27001),
+  };
 });
 
 export function BrandPrinciples() {
@@ -21,7 +27,7 @@ export function BrandPrinciples() {
     const ctx = el?.getContext("2d");
     if (!el || !ctx) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0, visible = false, width = 0, height = 0, time = 0, last = 0, dissolve = 0, target = 0;
+    let frame = 0, visible = false, width = 0, height = 0, time = 0, last = 0;
     const buckets: number[][] = Array.from({ length: 16 }, () => []);
     function draw(now: number) {
       frame = 0;
@@ -29,38 +35,25 @@ export function BrandPrinciples() {
       if (!reduced.matches && last && now - last < 32) { frame = requestAnimationFrame(draw); return; }
       if (last && !reduced.matches) time += Math.min(now - last, 80) / 1000;
       last = now;
-      dissolve += (target - dissolve) * (reduced.matches ? 1 : .035);
       ctx!.clearRect(0, 0, width, height);
       buckets.forEach(bucket => { bucket.length = 0; });
-      const unit = Math.min(width / 3.7, height / 2.5);
-      const rotations = [time * .085, -time * .085].map(a => [Math.cos(a), Math.sin(a)]);
-      const tilt = .22, ct = Math.cos(tilt), st = Math.sin(tilt);
+      const unit = Math.min(Math.min(width * .88, 1300) / 3.7, height / 2.9);
+      const dissolve = .72 + Math.sin(time * .12) * .055;
       for (const p of particles) {
-        const [c, s] = rotations[p.sphere];
-        const x = p.x * c + p.z * s;
-        const rz = p.z * c - p.x * s;
-        const y = p.y * ct - rz * st;
-        const z = p.y * st + rz * ct;
-        const edge = Math.hypot(x, y);
-        const radial = Math.pow(Math.max(edge, .0001), -.28);
-        const size = 1;
-        const center = p.sphere ? .665 : -.665;
-        const px = center + x * radial * size;
-        const py = y * radial * size;
-        // The inward-facing halves fade gently through their shared intersection.
-        const inward = p.sphere ? -x : x;
-        const fade = 1 - .84 * Math.pow(Math.max(0, Math.min(1, (inward + .15) / 1.15)), 1.2);
-        const pulse = Math.pow(.5 + .5 * Math.sin(time * .7 + p.seed), 16);
-        const alpha = (.28 + .17 * edge ** 3 + pulse * .17) * (z < 0 ? .4 : 1) * fade;
-        const opacity = alpha * (1 - dissolve) + .24 * dissolve;
-        const bucket = buckets[Math.min(15, Math.floor(opacity * 16))];
-        const driftX = Math.sin(time * .2 + p.seed) * .06;
-        const driftY = Math.cos(time * .17 + p.seed) * .06;
-        bucket.push(width / 2 + (px + (p.scatterX + driftX - px) * dissolve) * unit,
-          height / 2 + (py + (p.scatterY + driftY - py) * dissolve) * unit);
+        const angle = time * .055 * p.sphere;
+        const x = p.x * Math.cos(angle) + p.z * Math.sin(angle);
+        const z = p.z * Math.cos(angle) - p.x * Math.sin(angle);
+        const y = p.y * Math.cos(.22) - z * Math.sin(.22);
+        const px = p.sphere * .665 + x;
+        const driftX = Math.sin(time * .2 + p.seed) * .055;
+        const driftY = Math.cos(time * .17 + p.seed) * .055;
+        const screenX = width / 2 + (px * (1 - dissolve) + p.scatterX * dissolve + driftX) * unit;
+        const screenY = height / 2 + (y * (1 - dissolve) + p.scatterY * dissolve + driftY) * unit;
+        const opacity = .16 + p.depth * .12;
+        buckets[Math.floor(opacity * 16)].push(screenX, screenY);
       }
       ctx!.fillStyle = "#535957";
-      const dot = Math.max(.65, Math.min(1.35, unit * .005));
+      const dot = Math.max(.7, Math.min(1.4, width / 1000));
       for (let i = 0; i < buckets.length; i++) {
         ctx!.globalAlpha = (i + .5) / 16;
         ctx!.beginPath();
@@ -81,16 +74,13 @@ export function BrandPrinciples() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); resume();
     });
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; resume(); });
-    const enter = () => { target = 1; resume(); };
-    const leave = () => { target = 0; resume(); };
-    el.addEventListener("pointerenter", enter); el.addEventListener("pointerleave", leave);
-    el.addEventListener("focus", enter); el.addEventListener("blur", leave);
     resize.observe(el); observer.observe(el);
     document.addEventListener("visibilitychange", resume);
     reduced.addEventListener("change", resume);
-    return () => { el.removeEventListener("pointerenter", enter); el.removeEventListener("pointerleave", leave); el.removeEventListener("focus", enter); el.removeEventListener("blur", leave); cancelAnimationFrame(frame); resize.disconnect(); observer.disconnect(); document.removeEventListener("visibilitychange", resume); reduced.removeEventListener("change", resume); };
+    return () => { cancelAnimationFrame(frame); resize.disconnect(); observer.disconnect(); document.removeEventListener("visibilitychange", resume); reduced.removeEventListener("change", resume); };
   }, []);
-  return <section className="principles section particle-duality" aria-label="Two overlapping particle spheres with a translucent connection">
-    <canvas ref={canvas} className="duality-canvas" tabIndex={0} role="img" aria-label="Hover or focus to dissolve the spheres; leave to reform them" />
+  return <section className="principles section particle-duality" id="wordmark" aria-label="NovaIM">
+    <canvas ref={canvas} className="duality-canvas" aria-hidden="true" />
+    <ParticleWordmark />
   </section>;
 }
