@@ -3,12 +3,12 @@
 import { useEffect, useRef } from "react";
 import { Wordmark } from "./brand-mark";
 
-const rows = [[40, 60], [30, 50, 70], [20, 40, 60, 80], [30, 50, 70], [20, 40, 60, 80], [30, 50, 70], [40, 60]];
-const dots = rows.flatMap((row, y) => row.map(x => ({ x, y: 20 + y * 10, r: 1.55 + y * .45 })));
+import { brandPoints as dots } from "./brand-points";
+
 const stories = [
   ["It starts with a signal.", "One point. A possibility waiting to connect."],
-  ["Individual signals. Collective intelligence.", "Each point finds its place. Together, they form a connected foundation."],
-  ["A clear voice for a connected world.", "Zalando Sans. Open, precise, human. A name that gives the system an identity."],
+  ["Individual signals. Collective intelligence.", "Different points. A shared rhythm. Intelligence takes shape through connection."],
+  ["A clear voice for a connected world.", "The points become a mark. The name gives their connection a clear, human voice."],
   ["NovaIM.", "One connected foundation. An entire ecosystem of possibilities."],
 ];
 const clamp = (n: number) => Math.max(0, Math.min(1, n));

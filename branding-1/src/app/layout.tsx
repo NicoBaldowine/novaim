@@ -6,7 +6,7 @@ const zalando = Zalando_Sans({ variable: "--font-zalando", subsets: ["latin"], d
 
 export const metadata: Metadata = {
   title: "NovaIM — Brand Direction 2026",
-  description: "Intelligence, built in. A new identity for the intelligence infrastructure behind modern business.",
+  description: "From individual points to connected intelligence. The NovaIM identity brings distinct capabilities into one shared system.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
