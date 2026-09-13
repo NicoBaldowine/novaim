@@ -98,10 +98,10 @@ export function IdentityBento() {
       <div className="bento-orbit-crop"><SignalField mode="positioning" ink={inks[orbitColor]} /></div>
     </div>
     <div className="bento-mockup bento-social-profile">
-      <Image src="/mockups/novaim-social-profile-v4.png" alt="NovaIM social profile with a dotted sphere cover, constellation avatar, and Connecting points. Creating possibilities." fill sizes="(max-width: 700px) 88vw, 30vw" />
+      <Image src="/mockups/novaim-social-profile-v5.png" alt="NovaIM social profile with a dotted sphere cover, constellation avatar, and Connecting points. Creating possibilities." fill sizes="(max-width: 700px) 88vw, 30vw" />
     </div>
     <div className="bento-mockup bento-business-cards">
-      <Image src="/mockups/novaim-silver-foil-v2.png" alt="NovaIM logo stamped in silver foil near the corner of graphite-black textured paper." fill sizes="(max-width: 700px) 88vw, 60vw" />
+      <Image src="/mockups/novaim-laptop-hero-v1.png" alt="A black laptop on a sculptural plinth displaying the NovaIM Intelligence, built in hero and purple particle globe." fill sizes="(max-width: 700px) 88vw, 60vw" />
     </div>
   </div>;
 }
