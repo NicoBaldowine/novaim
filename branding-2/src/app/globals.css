@@ -546,3 +546,12 @@ html[data-motion=paused] *,html[data-motion=paused] *:before,html[data-motion=pa
 @media(max-width:700px) { .reference-layers > h2 { top:15%; } }
 .reference-layers > h2 { top:11%; }
 @media(max-width:700px) { .reference-layers > h2 { top:10%; } }
+
+/* Shared 1300px content container; positioning and layers remain full width. */
+main .section:not(.direction):not(.reference-layers) {
+  padding-inline: max(6%, calc((100% - 1300px) / 2));
+}
+.logo-cover > h1 {
+  width: min(88%, 1300px);
+  text-align: center;
+}
