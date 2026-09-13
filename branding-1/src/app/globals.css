@@ -625,10 +625,10 @@ html[data-motion=paused] .animated-mark circle { animation-play-state: paused; }
 .duality-canvas { display: block; width: min(100%, 1440px); height: clamp(300px, 48vw, 740px); }
 @media (max-width: 700px) { .principles.particle-duality { min-height: 65svh; padding: 80px 2vw; } }
 
-/* Keep the presentation composed on large displays. */
-main { width: 100%; max-width: 1300px; margin-inline: auto; }
-@media (min-width: 1300px) {
-  main .section { padding-inline: 65px; }
-  main .direction { gap: 26px; }
-  main .particle-duality { padding-inline: 40px; }
+/* Full-width section backgrounds, with a shared 1300px content measure.
+   Positioning and the closing statement retain their immersive scale. */
+main { width: 100%; max-width: none; margin: 0; }
+main .section:not(.direction):not(.closing) {
+  padding-inline: max(6%, calc((100% - 1300px) / 2));
 }
+main .particle-duality .duality-canvas { max-width: 1300px; }
