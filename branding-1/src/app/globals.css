@@ -620,3 +620,7 @@ html[data-motion=paused] .animated-mark circle { animation-play-state: paused; }
   .bento-social-profile { grid-column: span 2; }
   .bento-business-cards { aspect-ratio: 2; }
 }
+
+.principles.particle-duality { display: grid; place-items: center; padding: clamp(80px, 10vw, 180px) 4vw; min-height: 85svh; }
+.duality-canvas { display: block; width: min(100%, 1440px); height: clamp(300px, 48vw, 740px); }
+@media (max-width: 700px) { .principles.particle-duality { min-height: 65svh; padding: 80px 2vw; } }
