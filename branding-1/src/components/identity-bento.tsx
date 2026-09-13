@@ -75,8 +75,8 @@ export function IdentityBento() {
     </div>
     <div className={`bento-signal palette-theme-${themes[signalColor]}`}><SignalField mode={studies[study]} ink={inks[signalColor]} interactive /></div>
     <div className="bento-type">
-      <div className="type-window" aria-label="Zalando Sans uppercase and lowercase alphabet"><div className="type-track" aria-hidden="true">{[0, 1].map(copy => <span key={copy}>{Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ").map(letter => <span className="type-pair" key={letter}>{letter}{letter.toLowerCase()}</span>)}</span>)}</div></div>
-      <span className="bento-label">Zalando Sans Regular</span>
+      <div className="type-window" aria-label="Sans serif uppercase and lowercase alphabet"><div className="type-track" aria-hidden="true">{[0, 1].map(copy => <span key={copy}>{Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ").map(letter => <span className="type-pair" key={letter}>{letter}{letter.toLowerCase()}</span>)}</span>)}</div></div>
+      <span className="bento-label">Sans serif · Regular</span>
     </div>
     <div className="bento-palette" aria-label="Brand palette: Mint, Forest, Lilac, Plum, Carbon, Gray, White">
       <div className="palette-mint" tabIndex={0}><span>Mint<small>#62D8AA</small></span></div>
@@ -101,7 +101,7 @@ export function IdentityBento() {
       <Image src="/mockups/novaim-social-profile-v5.png" alt="NovaIM social profile with a dotted sphere cover, constellation avatar, and Connecting points. Creating possibilities." fill sizes="(max-width: 700px) 88vw, 30vw" />
     </div>
     <div className="bento-mockup bento-business-cards">
-      <Image src="/mockups/novaim-laptop-hero-v2.png" alt="A black laptop displaying NovaIM brand positioning and a subtle grayscale particle sphere, against a dark forest-green background." fill sizes="(max-width: 700px) 88vw, 60vw" />
+      <Image src="/mockups/novaim-laptop-hero-v3.png" alt="A black laptop displaying NovaIM brand positioning and a subtle grayscale particle sphere, against a dark forest-green background." fill sizes="(max-width: 700px) 88vw, 60vw" />
     </div>
   </div>;
 }

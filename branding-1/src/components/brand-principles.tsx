@@ -43,8 +43,8 @@ export function BrandPrinciples() {
         const z = p.y * st + rz * ct;
         const edge = Math.hypot(x, y);
         const radial = Math.pow(Math.max(edge, .0001), -.28);
-        const size = p.sphere ? 1 : .82;
-        const center = p.sphere ? .57 : -.76;
+        const size = 1;
+        const center = p.sphere ? .665 : -.665;
         const px = center + x * radial * size;
         const py = y * radial * size;
         // The inward-facing halves fade gently through their shared intersection.
