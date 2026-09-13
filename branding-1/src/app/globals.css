@@ -632,3 +632,7 @@ main .section:not(.direction):not(.closing) {
   padding-inline: max(6%, calc((100% - 1300px) / 2));
 }
 main .particle-duality .duality-canvas { max-width: 1300px; }
+
+/* Intro captions remain a single centered line at every viewport width. */
+.intro-stories { width: min(1100px, 92vw); max-width: none; }
+.intro-story p { white-space: nowrap; font-size: clamp(8px, 1.8vw, 16px); }
