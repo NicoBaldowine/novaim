@@ -612,3 +612,11 @@ html[data-motion=paused] .animated-mark circle { animation-play-state: paused; }
 .intro-lockup .brand-mark { width: 1.45em; height: 1.45em; }
 .intro-composition { position: static; }
 .intro-lockup { top: 46%; }
+
+/* Brand applications continue the alternating bento rhythm. */
+.bento-social-profile { aspect-ratio: 1; }
+.bento-business-cards { grid-column: span 2; }
+@media (max-width: 700px) {
+  .bento-social-profile { grid-column: span 2; }
+  .bento-business-cards { aspect-ratio: 2; }
+}

@@ -97,5 +97,11 @@ export function IdentityBento() {
     <div className={`bento-orbit palette-theme-${themes[orbitColor]}`} aria-label="A close-up of a rotating sphere of signals">
       <div className="bento-orbit-crop"><SignalField mode="positioning" ink={inks[orbitColor]} /></div>
     </div>
+    <div className="bento-mockup bento-social-profile">
+      <Image src="/mockups/novaim-social-profile-v1.png" alt="NovaIM social profile with a dotted sphere cover, constellation avatar, and Connecting points. Creating possibilities." fill sizes="(max-width: 700px) 88vw, 30vw" />
+    </div>
+    <div className="bento-mockup bento-business-cards">
+      <Image src="/mockups/novaim-business-cards-v1.png" alt="Textured NovaIM business cards in forest green and lilac, featuring the organic dot constellation and Intelligence, built in." fill sizes="(max-width: 700px) 88vw, 60vw" />
+    </div>
   </div>;
 }
