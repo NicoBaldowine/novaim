@@ -3,15 +3,15 @@
 import { useEffect, useRef } from "react";
 
 // Both surfaces share the positioning sphere geometry; hover dissolves the pair.
+const random = (n: number) => { const v = Math.sin(n * 127.1 + 311.7) * 43758.5453; return v - Math.floor(v); };
 const particles = Array.from({ length: 6000 }, (_, i) => {
   const sphere = i < 3000 ? 0 : 1;
   const n = i % 3000;
   const z = 1 - 2 * (n + .5) / 3000;
   const angle = n * 2.3999632297;
-  const u = ((n * 1597) % 3000 + .5) / 3000;
   const radius = 1;
   const ring = Math.sqrt(1 - z * z) * radius;
-  return { sphere, x: Math.cos(angle) * ring, y: Math.sin(angle) * ring, z: z * radius, seed: n * .731, scatterX: (u * 2 - 1) * 1.7, scatterY: (((n * 1091) % 3000 + .5) / 3000 * 2 - 1) * 1.05 };
+  return { sphere, x: Math.cos(angle) * ring, y: Math.sin(angle) * ring, z: z * radius, seed: n * .731, scatterX: (random(i + 1) * 2 - 1) * 1.7, scatterY: (random(i + 9001) * 2 - 1) * 1.05 };
 });
 
 export function BrandPrinciples() {
