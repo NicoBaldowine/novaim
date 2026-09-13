@@ -20,12 +20,13 @@ await rm(path.join(root,'site'),{recursive:true,force:true});
 await mkdir(path.join(root,'site'),{recursive:true});
 for (const direction of directions) {
   const app = path.join(root, direction);
-  const base = `${prefix}/${direction}`;
+  const route = process.env.COMPACT_ROUTES === '1' ? direction.replace('-', '') : direction;
+  const base = `${prefix}/${route}`;
   const originals = new Map();
   try {
     await rewrite(path.join(app,'src'), base, originals);
     execFileSync('npm',['run','build'],{cwd:app,stdio:'inherit',env:{...process.env,STATIC_EXPORT:'1',NEXT_PUBLIC_BASE_PATH:base}});
-    await cp(path.join(app,'out'),path.join(root,'site',direction),{recursive:true});
+    await cp(path.join(app,'out'),path.join(root,'site',route),{recursive:true});
   } finally {
     for(const [file,text] of originals) await writeFile(file,text);
   }

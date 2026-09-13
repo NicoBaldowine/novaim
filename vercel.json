@@ -2,8 +2,24 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "npm ci --prefix branding-1 && npm ci --prefix branding-2",
-  "buildCommand": "SITE_PREFIX='' node scripts/build-site.mjs",
+  "buildCommand": "SITE_PREFIX='' COMPACT_ROUTES=1 node scripts/build-site.mjs",
   "outputDirectory": "site",
   "trailingSlash": true,
-  "redirects": [{ "source": "/", "destination": "/branding-1/", "permanent": false }]
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/branding1/",
+      "permanent": false
+    },
+    {
+      "source": "/branding-1/:path*",
+      "destination": "/branding1/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/branding-2/:path*",
+      "destination": "/branding2/:path*",
+      "permanent": true
+    }
+  ]
 }
