@@ -101,7 +101,7 @@ export function IdentityBento() {
       <Image src="/mockups/novaim-social-profile-v1.png" alt="NovaIM social profile with a dotted sphere cover, constellation avatar, and Connecting points. Creating possibilities." fill sizes="(max-width: 700px) 88vw, 30vw" />
     </div>
     <div className="bento-mockup bento-business-cards">
-      <Image src="/mockups/novaim-silver-foil-v1.png" alt="NovaIM logo stamped in silver foil near the corner of graphite-black textured paper." fill sizes="(max-width: 700px) 88vw, 60vw" />
+      <Image src="/mockups/novaim-silver-foil-v2.png" alt="NovaIM logo stamped in silver foil near the corner of graphite-black textured paper." fill sizes="(max-width: 700px) 88vw, 60vw" />
     </div>
   </div>;
 }
