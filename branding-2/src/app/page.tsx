@@ -14,7 +14,7 @@ const concepts = [
   { title: "Move forward", copy: "Give every action a shared direction." },
   { title: "Build continuity", copy: "Create connections that carry intelligence further." },
   { title: "Add possibility", copy: "Let each new layer build on what came before." },
-  { title: "Act as one", copy: "A connected whole. More than the sum of its parts." },
+  { title: "Act as one", copy: "Distinct capabilities. A shared direction, just like the N." },
 ];
 
 export default function Home() {
@@ -63,10 +63,10 @@ export default function Home() {
           <p className="positioning-support">NovaIM connects AI products, agents and systems<br />into the infrastructure that moves business forward.</p>
         </div>
       </section>
-      <section className="language section" id="language"><p className="section-label">VISUAL CONCEPT</p><div className="section-heading"><h2>Simple forms.<br /><span>Connected possibilities.</span></h2><p>A visual language of layers, light and connection.<br />Each form expresses a different part of one shared system.</p></div><div className="concept-grid">{concepts.map((concept,index) => <article className="concept-card geometric-card" key={concept.title}><div className="concept-visual"><ConceptArt variant={index} /></div><div className="concept-copy"><h3>{concept.title}</h3><p>{concept.copy}</p></div></article>)}</div></section>
+      <section className="language section" id="language"><p className="section-label">VISUAL CONCEPT</p><div className="section-heading"><h2>Simple forms.<br /><span>Connected possibilities.</span></h2><p>The N expresses connection in one compact mark.<br />Layers show how capabilities build together; flowing lines show intelligence moving between them.</p></div><div className="concept-grid">{concepts.map((concept,index) => <article className="concept-card geometric-card" key={concept.title}><div className="concept-visual"><ConceptArt variant={index} /></div><div className="concept-copy"><h3>{concept.title}</h3><p>{concept.copy}</p></div></article>)}</div></section>
       </div>
       <BrandPrinciples />
-      <section className="identity section" id="identity"><div className="identity-heading"><h2>The identity</h2><p>A layered mark brings individual planes into one connected form. Instrument Sans gives that system a clear, human voice. Black gives the system focus. Cobalt accents and mineral blue connect simple geometry, repeating patterns and layered light. Sage reflections and graphite give the system depth. Each layer represents a capability; together, they form the infrastructure. Soft white brings clarity against a deep black foundation.</p></div><IdentityBento /></section>
+      <section className="identity section" id="identity"><div className="identity-heading"><h2>The identity</h2><p>Two connected forms make the N, giving NovaIM a compact expression of shared direction. The graphic system expands that idea: layers represent distinct capabilities, lines carry connection, and light reveals moments of activation. Instrument Sans keeps the supporting voice clear and human. Black and graphite provide focus; cobalt signals energy, with mineral blue, sage and ivory adding depth.</p></div><IdentityBento /></section>
       <section className="portfolio section" id="brands">
         <div className="portfolio-heading"><h2>Independent brands.<br />Connected layers.</h2></div>
         <div className="portfolio-grid">
@@ -82,7 +82,7 @@ export default function Home() {
             <h2 className="social-profile-name">novaim</h2>
             <p className="social-handle">@novaim</p>
             <p className="social-bio">Independent brands. Connected intelligence.<br />Building the infrastructure that moves business forward.</p>
-
+            
           </div>
         </article>
       </footer>

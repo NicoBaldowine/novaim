@@ -685,3 +685,15 @@ main .principles.section.chromatic-wordmark { display: grid; place-items: center
 .ink-dot { transition: opacity .22s ease, r .22s ease; }
 @media (max-width: 700px) { main .principles.section.chromatic-wordmark { min-height: 85svh; padding-block: 110px; } }
 @media (prefers-reduced-motion: reduce) { .chromatic-wordmark .wordmark-window, .ink-dot { transition: none; } .wordmark-reveal-ready:not(.wordmark-visible) .wordmark-window { opacity: 1; transform: none; } }
+
+/* A quiet, static cover for the L5 identity. */
+.logo-cover { min-height: 100svh; padding: 100px 6% 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(48px, 8vh, 88px); background: #080a09; color: #fff; }
+.cover-logo { width: min(70%, 620px); }
+.cover-logo .wordmark.supplied-wordmark { width: 100%; }
+.cover-rationale { margin: 0; max-width: 700px; text-align: center; color: #929a95; font-size: clamp(14px, 1.25vw, 17px); line-height: 1.65; text-wrap: balance; }
+@media (max-width: 700px) { .logo-cover { min-height: 90svh; padding-inline: 7%; gap: 48px; }.cover-logo { width: 80%; } }
+
+.bento-apparel-row { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.bento-apparel-row > div { aspect-ratio: 1; border-radius: 14px; overflow: hidden; }
+.bento-placeholder { background: #101613; border: 1px solid #26312b; }
+@media (max-width: 700px) { .bento-apparel-row { gap: 14px; } }

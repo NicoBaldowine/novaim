@@ -30,5 +30,9 @@ export function IdentityBento() {
       </div>)}</div>
     </div>
     <div className="bento-orbit bento-knot-detail" role="img" aria-label="Animated white lines on graphite"><PositioningGradient /></div>
+    <div className="bento-brand-applications">
+      <div className="bento-brand-photo"><Image src="/mockups/novaim-shirt-iso4.png" alt="White NovaIM symbol embroidered on a black shirt" fill sizes="(max-width:700px) 88vw, (min-width:1478px) 640px, 44vw" /></div>
+      <div className="bento-brand-photo"><Image src="/mockups/novaim-facade-iso4.png" alt="NovaIM symbol on a graphite sign mounted on a metal facade" fill sizes="(max-width:700px) 88vw, (min-width:1478px) 640px, 44vw" /></div>
+    </div>
   </div>;
 }

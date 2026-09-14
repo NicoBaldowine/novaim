@@ -621,3 +621,21 @@ main .section:not(.direction):not(.reference-layers) {
 .social-follow:focus-visible { outline:2px solid #6F8FB8; outline-offset:4px; }
 .social-profile-body { padding-bottom:34px; }
 @media(max-width:420px) { .social-actions { gap:12px; } .social-network { width:20px; height:20px; } .social-follow { min-width:70px; padding:9px 12px; font-size:12px; } .social-profile-toolbar { gap:8px; } }
+
+svg.brand-mark { mask:none; -webkit-mask:none; background:none; }
+
+.identity-bento > .bento-brand-applications { grid-column:1 / -1; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; overflow:visible; border-radius:0; }
+.bento-brand-photo { position:relative; aspect-ratio:1; overflow:hidden; border-radius:12px; background:#171A1F; }
+.bento-brand-photo img { object-fit:cover; }
+@media(max-width:700px) { .identity-bento > .bento-brand-applications { grid-template-columns:1fr; gap:14px; } }
+
+.logo-cover { align-content:center; gap:clamp(48px,7vw,100px); }
+.logo-rationale { width:min(82%,920px); margin:0 auto; text-align:center; font-size:clamp(16px,1.5vw,22px); line-height:1.65; color:#929b98; letter-spacing:-.025em; }
+@media(max-width:700px) { .logo-cover { gap:42px; } .logo-rationale { width:86%; font-size:16px; } }
+
+/* Refined logo presentation and shared identity narrative. */
+.logo-cover .logo-rationale { width:min(82%,760px); font-size:clamp(14px,1.1vw,17px); line-height:1.65; }
+.floating-logo { left:24px; }
+.vector-logo-guides { opacity:.2; }
+.vector-logo-guides path { stroke-width:.6px; }
+@media(max-width:700px) { .floating-logo { left:18px; } .logo-cover .logo-rationale { width:86%; font-size:14px; } }

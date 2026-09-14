@@ -22,12 +22,12 @@ export function IdentityBento() {
       const box = group.getBBox();
       // The N defines the cap line and baseline; O and rounded letters overshoot them.
       const vertical = part === "type" ? group.querySelectorAll<SVGPathElement>("path")[1].getBBox() : box;
-      return { left: box.x, right: box.x + box.width, top: vertical.y, bottom: vertical.y + vertical.height };
+      return { left: box.x - (part === "type" ? 15.48 : 0), right: box.x + box.width - (part === "type" ? 15.48 : 0), top: vertical.y - (part === "type" ? 20.62 : 0), bottom: vertical.y + vertical.height - (part === "type" ? 20.62 : 0) };
     }));
     measure();
     // Re-measure when a logo is replaced during Fast Refresh, not only on mount.
     const observer = new MutationObserver(measure);
-    observer.observe(logo, { subtree: true, childList: true, attributes: true, attributeFilter: ["d", "viewBox"] });
+    observer.observe(logo, { subtree: true, childList: true, attributes: true, attributeFilter: ["d", "viewBox", "transform"] });
     return () => observer.disconnect();
   }, []);
 
@@ -61,7 +61,7 @@ export function IdentityBento() {
   return <div className="identity-bento living-bento" ref={root}>
     <div className={`bento-logo logo-theme-${themes[colors[0]]}`} tabIndex={0} aria-label="NovaIM logo construction">
       <div className="logo-construction"><Wordmark />
-        <svg className="vector-construction" viewBox="0 0 820 129" fill="none" stroke="currentColor" aria-hidden="true">
+        <svg className="vector-construction" viewBox="0 -18 804 122" fill="none" stroke="currentColor" aria-hidden="true">
           {bounds.map((box, i) => <g key={i}>
             <path d={`M ${box.left} -90 V 219 M ${box.right} -90 V 219`} />
             <path strokeDasharray={i === 1 ? "4 4" : undefined} d={i === 0 ? `M -100 ${box.top} H 920 M -100 ${box.bottom} H 920` : `M ${box.left} ${box.top} H ${box.right} M ${box.left} ${box.bottom} H ${box.right}`} />
@@ -73,7 +73,7 @@ export function IdentityBento() {
     <div className={`bento-signal palette-theme-${themes[signalColor]}`}><SignalField mode={studies[study]} ink={inks[signalColor]} interactive /></div>
     <div className="bento-type">
       <div className="type-window" aria-label="Sans serif uppercase and lowercase alphabet"><div className="type-track" aria-hidden="true">{[0, 1].map(copy => <span key={copy}>{Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ").map(letter => <span className="type-pair" key={letter}>{letter}{letter.toLowerCase()}</span>)}</span>)}</div></div>
-      <span className="bento-label">Sans serif · Regular</span>
+      <span className="bento-label">Zalando Sans · Regular</span>
     </div>
     <div className="bento-palette" aria-label="Brand palette: Mint, Forest, Lilac, Plum, Carbon, Gray, White">
       <div className="palette-mint" tabIndex={0}><span>Mint<small>#62D8AA</small></span></div>
@@ -86,7 +86,7 @@ export function IdentityBento() {
       <Image src="/mockups/novaim-keynote-v2.png" alt="A dark auditorium with a live NovaIM presentation on stage." fill sizes="(max-width: 700px) 88vw, 58vw" />
       <div className={`keynote-screen palette-theme-${themes[colors[2]]}`}>
         <div className="keynote-slide" key={slide}>
-          <div className="keynote-copy"><Wordmark /><p>{[<>Intelligence,<br />built in.</>, <>One system.<br />More possibility.</>, <>Connected.<br />By design.</>][slide]}</p></div>
+          <div className="keynote-copy"><Wordmark /><p>{[<>Intelligence,<br />built in.</>, <>One system.<br />More possibility.</>, <>Intelligence<br />in motion.</>][slide]}</p></div>
           <div className="keynote-dots" aria-hidden="true" />
         </div>
       </div>
@@ -101,6 +101,14 @@ export function IdentityBento() {
     </div>
     <div className="bento-mockup bento-business-cards">
       <Image src="/mockups/novaim-laptop-hero-v3.png" alt="A black laptop displaying NovaIM brand positioning and a subtle grayscale particle sphere, against a dark forest-green background." fill sizes="(max-width: 700px) 88vw, 60vw" />
+    </div>
+    <div className="bento-apparel-row">
+      <div className="bento-mockup bento-shirt">
+        <Image src="/mockups/novaim-shirt-embroidered.png" alt="Black cotton T-shirt with the white NovaIM symbol embroidered on the chest." fill sizes="(max-width: 700px) 44vw, 650px" />
+      </div>
+      <div className="bento-mockup bento-facade">
+        <Image src="/mockups/novaim-facade-refined.png" alt="White NovaIM symbol on a dark purple sign mounted on a ribbed charcoal corporate facade." fill sizes="(max-width: 700px) 44vw, 650px" />
+      </div>
     </div>
   </div>;
 }
