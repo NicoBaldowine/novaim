@@ -33,7 +33,7 @@ export function ParticleWordmark() {
       ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = "#080a09";
       ctx.beginPath();
-      const textHeight = width * 70 / 470;
+      const textHeight = width * 87 / 618;
       const top = (height - textHeight) / 2;
       for (const point of points) {
         const startX = (random(point.seed + 17) - .5) * width * 1.2 + width / 2;
@@ -63,20 +63,20 @@ export function ParticleWordmark() {
     observer.observe(el);
     const copy = svg.cloneNode(true) as SVGSVGElement;
     copy.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    copy.setAttribute("width", "940"); copy.setAttribute("height", "140");
+    copy.setAttribute("width", "1236"); copy.setAttribute("height", "174");
     copy.style.color = "#000";
     const url = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(copy)], { type: "image/svg+xml" }));
     const image = new Image();
     image.onload = () => {
       URL.revokeObjectURL(url);
       if (disposed) return;
-      const mask = document.createElement("canvas"); mask.width = 940; mask.height = 140;
+      const mask = document.createElement("canvas"); mask.width = 1236; mask.height = 174;
       const context = mask.getContext("2d");
       if (!context) { show(); return; }
       context.drawImage(image, 0, 0);
-      const data = context.getImageData(0, 0, 940, 140).data;
-      for (let y = 1; y < 140; y += 3) for (let x = 1; x < 940; x += 3) {
-        if (data[(y * 940 + x) * 4 + 3] > 128) points.push({ x: x / 940, y: y / 140, seed: x * .71 + y * 1.37 });
+      const data = context.getImageData(0, 0, 1236, 174).data;
+      for (let y = 1; y < 174; y += 3) for (let x = 1; x < 1236; x += 3) {
+        if (data[(y * 1236 + x) * 4 + 3] > 128) points.push({ x: x / 1236, y: y / 174, seed: x * .71 + y * 1.37 });
       }
       ready = true; resume();
     };

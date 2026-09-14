@@ -36,8 +36,8 @@ export function LogoIntro() {
       const centerX = 500;
       const markAlpha = still ? 0 : ease((p - .3) / .17) * (1 - ease((p - .58) / .09));
       mark.style.opacity = String(markAlpha);
-      const markScale = p < .64 && !still ? 2.4 : 1.856;
-      mark.setAttribute("transform", `translate(${centerX - 66 * markScale} ${190 - 35 * markScale}) scale(${markScale})`);
+      const markScale = p < .64 && !still ? 1.85 : 1.44;
+      mark.setAttribute("transform", `translate(${centerX - 65 * markScale} ${190 - 64.5 * markScale}) scale(${markScale})`);
       seed.setAttribute("cx", String(centerX));
       seed.setAttribute("r", String(78 + (2.9 * 2.4 - 78) * gather));
       seed.style.opacity = String(still ? 0 : 1 - ease((p - .47) / .03));

@@ -53,10 +53,10 @@ export function IdentityBento() {
   return <div className="identity-bento living-bento" ref={root}>
     <div className={`bento-logo logo-theme-${themes[colors[0]]}`} tabIndex={0} aria-label="NovaIM logo construction">
       <div className="logo-construction"><Wordmark />
-        <svg className="vector-construction" viewBox="0 0 671 70" fill="none" stroke="currentColor" aria-hidden="true">
+        <svg className="vector-construction" viewBox="0 0 820 129" fill="none" stroke="currentColor" aria-hidden="true">
           {bounds.map((box, i) => <g key={i}>
             <path d={`M ${box.left} -90 V 219 M ${box.right} -90 V 219`} />
-            <path d={i === 0 ? `M -100 ${box.top} H 771 M -100 ${box.bottom} H 771` : `M ${box.left} ${box.top} H ${box.right} M ${box.left} ${box.bottom} H ${box.right}`} />
+            <path d={i === 0 ? `M -100 ${box.top} H 920 M -100 ${box.bottom} H 920` : `M ${box.left} ${box.top} H ${box.right} M ${box.left} ${box.bottom} H ${box.right}`} />
           </g>)}
         </svg>
       </div>

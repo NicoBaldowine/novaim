@@ -637,7 +637,7 @@ main .particle-duality .duality-canvas { max-width: 1300px; }
 .intro-stories { width: min(1100px, 92vw); max-width: none; }
 .intro-story p { white-space: nowrap; font-size: clamp(8px, 1.8vw, 16px); }
 
-/* Supplied vector lockup: preserve the original 671:70 proportions. */
+/* Supplied vector lockup: preserve the original 820:129 proportions. */
 .wordmark.supplied-wordmark { display: inline-flex; width: 6.36em; max-width: 100%; gap: 0; }
 .wordmark.supplied-wordmark .supplied-logo { display: block; width: 100%; height: auto; flex: none; }
 .logo-construction { max-width: 82%; }
