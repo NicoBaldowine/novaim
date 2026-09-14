@@ -17,10 +17,18 @@ export function IdentityBento() {
   useEffect(() => {
     const logo = root.current?.querySelector<SVGSVGElement>(".logo-construction .supplied-logo");
     if (!logo) return;
-    setBounds(["mark", "type"].map(part => {
-      const box = logo.querySelector<SVGGElement>(`[data-logo-part="${part}"]`)!.getBBox();
-      return { left: box.x, right: box.x + box.width, top: box.y, bottom: box.y + box.height };
+    const measure = () => setBounds(["mark", "type"].map(part => {
+      const group = logo.querySelector<SVGGElement>(`[data-logo-part="${part}"]`)!;
+      const box = group.getBBox();
+      // The N defines the cap line and baseline; O and rounded letters overshoot them.
+      const vertical = part === "type" ? group.querySelectorAll<SVGPathElement>("path")[1].getBBox() : box;
+      return { left: box.x, right: box.x + box.width, top: vertical.y, bottom: vertical.y + vertical.height };
     }));
+    measure();
+    // Re-measure when a logo is replaced during Fast Refresh, not only on mount.
+    const observer = new MutationObserver(measure);
+    observer.observe(logo, { subtree: true, childList: true, attributes: true, attributeFilter: ["d", "viewBox"] });
+    return () => observer.disconnect();
   }, []);
 
   const [study, setStudy] = useState(0);
@@ -56,7 +64,7 @@ export function IdentityBento() {
         <svg className="vector-construction" viewBox="0 0 820 129" fill="none" stroke="currentColor" aria-hidden="true">
           {bounds.map((box, i) => <g key={i}>
             <path d={`M ${box.left} -90 V 219 M ${box.right} -90 V 219`} />
-            <path d={i === 0 ? `M -100 ${box.top} H 920 M -100 ${box.bottom} H 920` : `M ${box.left} ${box.top} H ${box.right} M ${box.left} ${box.bottom} H ${box.right}`} />
+            <path strokeDasharray={i === 1 ? "4 4" : undefined} d={i === 0 ? `M -100 ${box.top} H 920 M -100 ${box.bottom} H 920` : `M ${box.left} ${box.top} H ${box.right} M ${box.left} ${box.bottom} H ${box.right}`} />
           </g>)}
         </svg>
       </div>

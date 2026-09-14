@@ -1,86 +1,79 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { ParticleWordmark } from "./particle-wordmark";
+import { useEffect, useId, useRef } from "react";
+import { TypeShape } from "./brand-mark";
 
-// Keep the two original volumes suspended partway through their dissolution.
-const random = (n: number) => { const v = Math.sin(n * 127.1 + 311.7) * 43758.5453; return v - Math.floor(v); };
-const particles = Array.from({ length: 6000 }, (_, i) => {
-  const n = i % 3000;
-  const z = 1 - 2 * (n + .5) / 3000;
-  const angle = n * 2.3999632297;
-  const ring = Math.sqrt(1 - z * z);
-  return {
-    sphere: i < 3000 ? -1 : 1,
-    x: Math.cos(angle) * ring, y: Math.sin(angle) * ring, z,
-    scatterX: (random(i + 1) * 2 - 1) * 1.7,
-    scatterY: (random(i + 9001) * 2 - 1) * 1.05,
-    seed: random(i + 18001) * Math.PI * 2,
-    depth: random(i + 27001),
-  };
-});
+const dots = Array.from({ length: 207 * 30 }, (_, i) => ({ x: 202 + (i % 207) * 3, y: 20 + Math.floor(i / 207) * 3 }));
 
 export function BrandPrinciples() {
-  const canvas = useRef<HTMLCanvasElement>(null);
+  const id = useId().replace(/:/g, "");
+  const section = useRef<HTMLElement>(null);
+  const svg = useRef<SVGSVGElement>(null);
   useEffect(() => {
-    const el = canvas.current;
-    const ctx = el?.getContext("2d");
-    if (!el || !ctx) return;
+    const root = section.current;
+    const art = svg.current;
+    if (!root || !art) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0, visible = false, width = 0, height = 0, time = 0, last = 0;
-    const buckets: number[][] = Array.from({ length: 16 }, () => []);
-    function draw(now: number) {
+    const light = art.querySelector<SVGRadialGradientElement>(".wordmark-light")!;
+    const route = art.querySelector<SVGPathElement>(".light-route")!;
+    const length = route.getTotalLength();
+    const samples = Array.from({ length: 700 }, (_, i) => route.getPointAtLength(i / 699 * length));
+    let frame = 0, visible = false, last = 0, time = 0, lastPointerMove = -Infinity;
+    let pointer: { x: number; y: number } | null = null;
+    const position = { x: 209, y: 98 };
+    const illuminate = (now: number) => {
       frame = 0;
-      if (!visible || document.hidden || !width) { last = 0; return; }
-      if (!reduced.matches && last && now - last < 32) { frame = requestAnimationFrame(draw); return; }
-      if (last && !reduced.matches) time += Math.min(now - last, 80) / 1000;
+      if (!visible || document.hidden) { last = 0; return; }
+      const dt = last ? Math.min(now - last, 64) / 1000 : 1 / 60;
       last = now;
-      ctx!.clearRect(0, 0, width, height);
-      buckets.forEach(bucket => { bucket.length = 0; });
-      const unit = Math.min(Math.min(width * .88, 1300) / 3.7, height / 2.9);
-      const dissolve = .72 + Math.sin(time * .12) * .055;
-      for (const p of particles) {
-        const angle = time * .055 * p.sphere;
-        const x = p.x * Math.cos(angle) + p.z * Math.sin(angle);
-        const z = p.z * Math.cos(angle) - p.x * Math.sin(angle);
-        const y = p.y * Math.cos(.22) - z * Math.sin(.22);
-        const px = p.sphere * .665 + x;
-        const driftX = Math.sin(time * .2 + p.seed) * .055;
-        const driftY = Math.cos(time * .17 + p.seed) * .055;
-        const screenX = width / 2 + (px * (1 - dissolve) + p.scatterX * dissolve + driftX) * unit;
-        const screenY = height / 2 + (y * (1 - dissolve) + p.scatterY * dissolve + driftY) * unit;
-        const opacity = .16 + p.depth * .12;
-        buckets[Math.floor(opacity * 16)].push(screenX, screenY);
-      }
-      ctx!.fillStyle = "#535957";
-      const dot = Math.max(.7, Math.min(1.4, width / 1000));
-      for (let i = 0; i < buckets.length; i++) {
-        ctx!.globalAlpha = (i + .5) / 16;
-        ctx!.beginPath();
-        const points = buckets[i];
-        for (let j = 0; j < points.length; j += 2) {
-          ctx!.moveTo(points[j] + dot, points[j + 1]);
-          ctx!.arc(points[j], points[j + 1], dot, 0, Math.PI * 2);
-        }
-        ctx!.fill();
-      }
-      if (!reduced.matches) frame = requestAnimationFrame(draw);
-    }
-    function resume() { cancelAnimationFrame(frame); last = 0; frame = requestAnimationFrame(draw); }
-    const resize = new ResizeObserver(() => {
-      const rect = el.getBoundingClientRect(); width = rect.width; height = rect.height;
-      const dpr = Math.min(devicePixelRatio, 1.5);
-      el.width = Math.round(width * dpr); el.height = Math.round(height * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); resume();
-    });
-    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; resume(); });
-    resize.observe(el); observer.observe(el);
+      if (!reduced.matches) time += dt;
+      const auto = route.getPointAtLength((time / 15 % 1) * length);
+      const target = pointer && now - lastPointerMove < 1400 ? pointer : auto;
+      const blend = reduced.matches ? 1 : 1 - Math.exp(-dt * 7);
+      position.x += (target.x - position.x) * blend;
+      position.y += (target.y - position.y) * blend;
+      light.setAttribute("cx", String(position.x));
+      light.setAttribute("cy", String(position.y));
+      if (!reduced.matches) frame = requestAnimationFrame(illuminate);
+    };
+    const resume = () => { if (!frame) frame = requestAnimationFrame(illuminate); };
+    const move = (event: PointerEvent) => {
+      const matrix = art.getScreenCTM();
+      if (!matrix) return;
+      const p = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
+      // Keep the light on the lettering, even when the cursor crosses a counter.
+      pointer = samples.reduce((closest, point) =>
+        Math.hypot(point.x - p.x, point.y - p.y) < Math.hypot(closest.x - p.x, closest.y - p.y) ? point : closest);
+      lastPointerMove = performance.now(); resume();
+    };
+    const leave = () => { pointer = null; resume(); };
+    art.addEventListener("pointermove", move);
+    art.addEventListener("pointerleave", leave);
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (entry.intersectionRatio >= .3) root.classList.add("wordmark-visible");
+      resume();
+    }, { threshold: [0, .3] });
+    if (reduced.matches) root.classList.add("wordmark-visible");
+    else root.classList.add("wordmark-reveal-ready");
+    observer.observe(root);
     document.addEventListener("visibilitychange", resume);
     reduced.addEventListener("change", resume);
-    return () => { cancelAnimationFrame(frame); resize.disconnect(); observer.disconnect(); document.removeEventListener("visibilitychange", resume); reduced.removeEventListener("change", resume); };
+    return () => { observer.disconnect(); cancelAnimationFrame(frame); document.removeEventListener("visibilitychange", resume); reduced.removeEventListener("change", resume); art.removeEventListener("pointermove", move); art.removeEventListener("pointerleave", leave); };
   }, []);
-  return <section className="principles section particle-duality" id="wordmark" aria-label="NovaIM">
-    <canvas ref={canvas} className="duality-canvas" aria-hidden="true" />
-    <ParticleWordmark />
+  return <section ref={section} className="principles section chromatic-wordmark" id="wordmark" aria-label="NovaIM">
+    <svg ref={svg} className="wordmark-window" viewBox="202 20 618 87" role="img" aria-label="NovaIM — a black wordmark with a grid of light dots with automatic illumination that follows the cursor on hover">
+      <defs>
+        <path className="light-route" d="M209 98 V35 Q209 22 220 29 L282 98 Q297 106 297 91 V29 M374 29 C310 29 310 98 374 98 C439 98 439 29 374 29 M443 29 L481 97 Q488 103 496 96 L534 29 M539 99 L575 32 Q585 20 595 32 L632 99 M553 82 H617 M665 29 V99 M700 99 V36 Q700 20 715 31 L750 96 Q756 105 763 94 L794 33 Q810 18 812 36 V99" />
+        <clipPath id={`${id}-letters`}><TypeShape /></clipPath>
+        <radialGradient className="wordmark-light" id={`${id}-light`} gradientUnits="userSpaceOnUse" cx="260" cy="63" r="38">
+          <stop stopColor="#fff" /><stop offset=".45" stopColor="#fff" /><stop offset="1" stopColor="#262a28" />
+        </radialGradient>
+      </defs>
+      <g clipPath={`url(#${id}-letters)`}>
+        <rect x="202" y="20" width="618" height="87" fill="#080a09" />
+        {dots.map((dot, i) => <circle className="ink-dot" key={i} cx={dot.x} cy={dot.y} r=".27" fill={`url(#${id}-light)`} />)}
+      </g>
+    </svg>
   </section>;
 }

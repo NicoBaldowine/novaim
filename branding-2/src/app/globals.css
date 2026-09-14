@@ -555,3 +555,69 @@ main .section:not(.direction):not(.reference-layers) {
   width: min(88%, 1300px);
   text-align: center;
 }
+
+/* Supplied logo2 vector, with its original proportions. */
+.wordmark.supplied-wordmark { display: inline-flex; width: 7.6em; max-width: 100%; gap: 0; }
+.wordmark.supplied-wordmark .supplied-logo { display: block; width: 100%; height: auto; overflow: hidden; }
+.bento-logo .vector-logo-construction { width: 68%; max-width: 68%; line-height: 0; position: relative; }
+.vector-logo-construction .supplied-wordmark { width: 100%; }
+.vector-logo-guides { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; opacity: .22; pointer-events: none; }
+.vector-logo-guides path { stroke-width: .65px; vector-effect: non-scaling-stroke; }
+.brand-wordmark-footer { width: min(88%, 1300px); margin: 0 auto; padding: clamp(80px, 12vw, 180px) 0; color: #fff; }
+.brand-wordmark-footer .supplied-wordmark { width: 100%; }
+
+/* Refined cover lockup with more breathing room. */
+.logo-cover .wordmark.supplied-wordmark { width: 6.5em; max-width: 88%; }
+
+/* Landing navigation and repeated brand signature. */
+.floating-logo { position:fixed; top:18px; left:6%; z-index:50; display:block; width:128px; color:#F1F0EA; opacity:0; visibility:hidden; pointer-events:none; transition:opacity .35s ease,visibility .35s; }
+.floating-logo.is-visible { opacity:1; visibility:visible; pointer-events:auto; }
+.floating-logo .wordmark.supplied-wordmark { width:100%; max-width:100%; }
+.floating-logo:focus-visible { outline:1px solid currentColor; outline-offset:8px; }
+.bento-logo .vector-logo-construction { width:56%; max-width:56%; }
+.brand-wordmark-footer { display:flex; flex-direction:column; gap:0; }
+.footer-wordmark-row { position:relative; line-height:0; }
+.footer-wordmark-row + .footer-wordmark-row { margin-top:-14.6%; }
+@media(max-width:700px) { .floating-logo { top:12px; width:102px; } .bento-logo .vector-logo-construction { width:62%; max-width:62%; } }
+@media(prefers-reduced-motion:reduce) { .floating-logo { transition:none; } }
+
+.footer-wordmark-row:first-child { z-index:6; }
+.footer-wordmark-row:nth-child(2) { z-index:5; }
+.footer-wordmark-row:nth-child(3) { z-index:4; }
+.footer-wordmark-row:nth-child(4) { z-index:3; }
+.footer-wordmark-row:nth-child(5) { z-index:2; }
+.footer-wordmark-row:nth-child(6) { z-index:1; }
+
+
+/* Social profile as the closing brand application. */
+.social-footer { width:min(88%,1300px); margin:80px auto 60px; padding:clamp(48px,8vw,110px) 24px; border-radius:28px; background:radial-gradient(ellipse closest-side at 50% 50%,#23468f80 0%,#163A6B55 50%,#05060700 100%); }
+.social-profile { width:min(100%,560px); margin:auto; overflow:hidden; border-radius:24px; background:#171A1F; border:1px solid #ffffff18; box-shadow:0 28px 80px #0006; }
+.social-cover { height:245px; position:relative; isolation:isolate; overflow:hidden; background:#171A1F; }
+.social-cover .positioning-knot { inset:-35%; z-index:0; background:transparent; opacity:.5; mix-blend-mode:screen; }
+.social-cover .positioning-knot::after { display:none; }
+.social-cover .positioning-knot video { filter:grayscale(1) contrast(2); }
+.social-cover > span { position:absolute; top:28px; left:30px; color:#F1F0EA; font-size:25px; line-height:1.12; letter-spacing:-.04em; }
+.social-profile-body { padding:0 30px 28px; }
+.social-profile-toolbar { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; margin-top:-48px; position:relative; }
+.social-avatar { width:110px; height:110px; flex-shrink:0; display:grid; place-items:center; border:6px solid #171A1F; border-radius:22px; background:#2F5BEA; color:#fff; }
+.social-avatar .brand-mark { width:62px; height:62px; background:none; mask:none; -webkit-mask:none; display:block; }
+.social-explore { display:inline-flex; align-items:center; gap:12px; border:1px solid #ffffff28; border-radius:30px; color:#F1F0EA; padding:10px 16px; margin-bottom:5px; font-size:12px; text-decoration:none; transition:background .2s; }
+.social-explore:hover,.social-explore:focus-visible { background:#2F5BEA; }
+.social-profile-name { margin:18px 0 0; font-size:42px; font-weight:500; letter-spacing:-.05em; line-height:1.1; color:#F1F0EA; }
+.social-profile-name .wordmark.supplied-wordmark { width:155px; }
+.social-handle { color:#78818e; font-size:14px; margin:4px 0 22px; }
+.social-bio { font-size:16px; line-height:1.6; color:#c6cbd2; letter-spacing:-.015em; }
+.social-profile-bottom { display:flex; justify-content:space-between; gap:16px; border-top:1px solid #ffffff10; margin-top:28px; padding-top:20px; color:#8294b0; font-size:12px; }
+.social-profile-bottom i { font-style:normal; padding:0 6px; }
+@media(max-width:600px) { .social-footer { padding:36px 16px; border-radius:20px; } .social-cover { height:210px; } .social-profile-body { padding:0 20px 24px; } .social-avatar { width:90px; height:90px; } .social-avatar .brand-mark { width:50px; height:50px; } .social-explore { padding:9px 11px; font-size:11px; gap:6px; } .social-bio { font-size:14px; } }
+
+.social-profile { font-family:var(--font-instrument),sans-serif; }
+
+.social-actions { display:flex; align-items:center; gap:16px; padding-bottom:8px; color:#fff; }
+.social-network { display:inline-flex; width:22px; height:22px; }
+.social-network svg { width:100%; height:100%; }
+.social-follow { border:0; border-radius:30px; background:#fff; color:#171A1F; min-width:88px; padding:10px 18px; font:500 14px var(--font-instrument),sans-serif; }
+.social-follow:hover { background:#e5e8ef; }
+.social-follow:focus-visible { outline:2px solid #6F8FB8; outline-offset:4px; }
+.social-profile-body { padding-bottom:34px; }
+@media(max-width:420px) { .social-actions { gap:12px; } .social-network { width:20px; height:20px; } .social-follow { min-width:70px; padding:9px 12px; font-size:12px; } .social-profile-toolbar { gap:8px; } }

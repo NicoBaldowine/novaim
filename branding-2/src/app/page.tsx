@@ -1,7 +1,10 @@
+import { BrandMark, Wordmark } from "@/components/brand-mark";
 import { PositioningGradient } from "@/components/positioning-gradient";
 import { ConceptArt } from "@/components/concept-art";
 import { BrandPrinciples, LayerField } from "@/components/brand-principles";
 import { IdentityBento } from "@/components/identity-bento";
+import { SocialActions } from "@/components/social-actions";
+import { FloatingLogo } from "@/components/floating-logo";
 import { LogoIntro } from "@/components/logo-intro";
 
 
@@ -17,6 +20,9 @@ const concepts = [
 export default function Home() {
   return <>
     <svg width="0" height="0" aria-hidden="true" style={{ position: "absolute", pointerEvents: "none" }}><defs>
+      <linearGradient id="footer-wordmark-gradient" x1="0" y1="0" x2="0" y2="1">
+        <stop stopColor="#E3D9B9" /><stop offset=".12" stopColor="#9EB3A7" /><stop offset=".4" stopColor="#355FD6" /><stop offset=".78" stopColor="#06111D" /><stop offset="1" stopColor="#050607" />
+      </linearGradient>
       <filter id="knot-fine-lines" colorInterpolationFilters="sRGB">
         <feColorMatrix type="saturate" values="0" />
         <feComponentTransfer>
@@ -44,6 +50,7 @@ export default function Home() {
       </filter>
     </defs></svg>
     <a className="skip-link" href="#direction">Skip to the proposal</a>
+    <FloatingLogo />
     <main>
       <LogoIntro />
 
@@ -67,6 +74,18 @@ export default function Home() {
           <article className="product-card product-broky"><div className="product-visual product-layer-detail"><LayerField /></div><div className="product-copy"><h3>Broki</h3><p>An AI agent for real estate. A focused application of NovaIM’s intelligence, built around the property business.</p></div></article>
         </div>
       </section>
+      <footer className="social-footer" id="footer">
+        <article className="social-profile" aria-label="NovaIM social profile">
+          <div className="social-cover"><PositioningGradient /></div>
+          <div className="social-profile-body">
+            <div className="social-profile-toolbar"><div className="social-avatar"><BrandMark /></div><SocialActions /></div>
+            <h2 className="social-profile-name">novaim</h2>
+            <p className="social-handle">@novaim</p>
+            <p className="social-bio">Independent brands. Connected intelligence.<br />Building the infrastructure that moves business forward.</p>
+
+          </div>
+        </article>
+      </footer>
     </main>
   </>;
 }
