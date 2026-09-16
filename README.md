@@ -30,3 +30,9 @@ Push to `main` to deploy through GitHub Pages. The build exports the presentatio
 ## Vercel
 
 Import this repository with the Root Directory left empty and the Other framework preset. The root `vercel.json` builds both presentations into `site/`, exposed at `/branding-1/` and `/branding-2/`. The homepage redirects to `/branding-1/`.
+
+## Landing 1
+
+Source: `landing-1/`. A hero-only landing with the lowercase novaim logo, Zalando Sans, an animated particle sphere and placeholder sections.
+
+Run `cd landing-1 && npm ci && npm run dev -- --port 3003` for local development. The shared build includes `/landing1/` on Vercel and `/novaim/landing-1/` on GitHub Pages.

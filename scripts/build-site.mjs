@@ -2,7 +2,7 @@ import { readdir, readFile, writeFile, mkdir, cp, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 const root = process.cwd();
-const directions = ['branding-1', 'branding-2'];
+const directions = ['branding-1', 'branding-2', 'landing-1'];
 const prefix = process.env.SITE_PREFIX ?? '/novaim';
 
 async function rewrite(dir, base, originals) {
