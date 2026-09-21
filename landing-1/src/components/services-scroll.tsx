@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useRef } from "react";
 import { SignalField, type SignalMode } from "./signal-field";
 
 const services: { mode: SignalMode; title: string; description: string }[] = [
@@ -10,45 +7,9 @@ const services: { mode: SignalMode; title: string; description: string }[] = [
 ];
 
 export function ServicesScroll() {
-  const shell = useRef<HTMLElement>(null);
-  const track = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let frame = 0;
-
-    const update = () => {
-      frame = 0;
-      const section = shell.current;
-      const row = track.current;
-      if (!section || !row || !matchMedia("(max-width: 600px)").matches) {
-        row?.style.removeProperty("--services-shift");
-        return;
-      }
-
-      const bounds = section.getBoundingClientRect();
-      const travel = Math.max(1, section.offsetHeight - window.innerHeight);
-      const progress = Math.min(1, Math.max(0, (68 - bounds.top) / travel));
-      const distance = Math.max(0, row.scrollWidth - window.innerWidth);
-      row.style.setProperty("--services-shift", `${-distance * progress}px`);
-    };
-
-    const requestUpdate = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-    };
-  }, []);
-
-  return <section className="services-scroll" id="services" aria-label="Our services and approach" ref={shell}>
+  return <section className="services-scroll" id="services" aria-label="Our services and approach">
     <div className="services-sticky">
-      <div className="value-grid" ref={track}>
+      <div className="value-grid">
         {services.map(service => <article className={`value-card ${service.mode}`} key={service.mode}>
           <div className="value-art"><SignalField mode={service.mode} interactive ink={service.mode === "infrastructure" ? "#c4a1e8" : "#62d8aa"} /></div>
           <div className="value-copy"><h2>{service.title}</h2><p>{service.description}</p></div>
