@@ -11,6 +11,7 @@ function HeaderArrow() {
 
 export function SiteHeader() {
   const [light, setLight] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const updateTheme = () => {
@@ -29,10 +30,20 @@ export function SiteHeader() {
     };
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
   return <header className={`header${light ? " header-light" : ""}`}>
     <a className="logo" href="#" aria-label="novaim home"><Wordmark /></a>
     <nav className="desktop-nav" aria-label="Main navigation">{sections.slice(0, 3).map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav>
     <a className="contact-link" href="#contact">Let’s talk <HeaderArrow /></a>
-    <details className="mobile-menu"><summary>Menu <span>+</span></summary><nav aria-label="Mobile navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}<HeaderArrow /></a>)}</nav></details>
+    <div className={`mobile-menu${menuOpen ? " is-open" : ""}`}>
+      <button type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} onClick={() => setMenuOpen(open => !open)}>
+        <span className="mobile-menu-icon" aria-hidden="true"><i /><i /><i /></span>
+      </button>
+      <nav aria-label="Mobile navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{section}<HeaderArrow /></a>)}</nav>
+    </div>
   </header>;
 }

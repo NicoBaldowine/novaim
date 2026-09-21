@@ -1,17 +1,12 @@
-import { HeroMotion } from "@/components/hero-motion";
-import { SignalField, type SignalMode } from "@/components/signal-field";
+import DottedSurface from "@/components/ui/dotted-surface";
+import { ServicesScroll } from "@/components/services-scroll";
 import { ContactForm } from "@/components/contact-form";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { SiteHeader } from "@/components/site-header";
+import { ProductScenes } from "@/components/product-scenes";
 import Image from "next/image";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
-const values: { mode: SignalMode; title: string; description: string }[] = [
-  { mode: "signals", title: "Agents built for your business", description: "We turn operational challenges into purpose-built AI agents that understand your context, take action and help your team focus on higher-value work." },
-  { mode: "systems", title: "Connected teams, smarter operations", description: "We connect agents, people and tools across your business, bringing fragmented workflows together so intelligence can move from one team to the next." },
-  { mode: "infrastructure", title: "Engineered for long-term growth", description: "We build the shared technology foundation behind our services and ventures, making it easier to launch new capabilities and scale what works." },
-];
 
 const products = [
   {
@@ -60,24 +55,21 @@ export default function Landing() {
     <SiteHeader />
     <main id="main">
       <section className="hero" aria-labelledby="hero-title">
+        <div className="hero-surface" aria-hidden="true">
+          <DottedSurface size={8} opacity={0.8} sizeAttenuation vertexColors />
+        </div>
         <div className="hero-copy">
           <h1 id="hero-title">Agentic engineering<br />services. Built for<br /><span className="heading-accent">what’s next.</span></h1>
           <p className="hero-support">We design, build and integrate AI agents that work across your business. From everyday workflows to complex operations, we help your teams turn AI into practical, scalable solutions.</p>
           <a className="hero-cta" href="#products">See our products <Arrow /></a>
         </div>
-        <HeroMotion />
         <div className="hero-proof" aria-label="Company logo examples">
           {clientLogos.map(logo => <div className="proof-logo" key={logo.name} title={logo.name}>
             <Image src={logo.src} width={140} height={36} alt={logo.name} />
           </div>)}
         </div>
       </section>
-      <section className="value-grid" id="services" aria-label="Our services and approach">
-        {values.map(value => <article className={`value-card ${value.mode}`} key={value.mode}>
-          <div className="value-art"><SignalField mode={value.mode} interactive ink={value.mode === "infrastructure" ? "#c4a1e8" : "#62d8aa"} /></div>
-          <div className="value-copy"><h2>{value.title}</h2><p>{value.description}</p></div>
-        </article>)}
-      </section>
+      <ServicesScroll />
       {/*
       <section className="workflow" id="process" aria-labelledby="workflow-heading">
         <div className="workflow-inner">
@@ -92,21 +84,8 @@ export default function Landing() {
         </div>
       </section>
       */}
-      <section className="products" id="products" aria-labelledby="products-heading">
-        <div className="products-heading">
-          <h2 id="products-heading">Focused products.<br /><span>Built from shared intelligence.</span></h2>
-        </div>
-        <div className="product-list">
-          {products.map((product, index) => <article className={`product-slice ${index % 2 ? "product-reverse" : ""}`} key={product.name}>
-            <div className="product-content">
-              <p className="product-name">{product.name}</p>
-              <h3>{product.statement}</h3>
-              <p className="product-description">{product.description}</p>
-              <button className="product-link" type="button">Visit {product.name} <Arrow diagonal /></button>
-            </div>
-            <div className="product-placeholder" aria-label={`${product.name} image placeholder`} role="img" />
-          </article>)}
-        </div>
+      <section className="products" id="products" aria-label="Focused products">
+        <ProductScenes products={products} />
       </section>
       <section className="testimonial" id="company" aria-labelledby="testimonial-heading">
         <TestimonialCarousel />
