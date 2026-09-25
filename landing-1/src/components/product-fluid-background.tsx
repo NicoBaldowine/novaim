@@ -18,9 +18,14 @@ export function ProductFluidBackground({
   const canvas = useRef<HTMLCanvasElement>(null);
   const running = useRef(active);
   const wake = useRef<(() => void) | null>(null);
+  const targetPalette = useRef(colors.slice(1, 3).map(rgb));
+  const currentPalette = useRef(colors.slice(1, 3).map(rgb));
   const [visited, setVisited] = useState(active);
   const [ready, setReady] = useState(false);
-  const palette = colors.join(",");
+
+  useEffect(() => {
+    targetPalette.current = colors.slice(1, 3).map(rgb);
+  }, [colors]);
 
   useEffect(() => {
     running.current = active;
@@ -38,17 +43,15 @@ export function ProductFluidBackground({
     async function mount() {
       const { createStudioRenderer } = await import("asciify-engine/studio");
       if (disposed) return;
-      const selected = palette.split(",");
-      const low = rgb(selected[1]);
-      const high = rgb(selected[2]);
+      const selected = colors;
       const source = document.createElement("canvas");
       source.width = 320;
       source.height = 240;
       const context = source.getContext("2d")!;
-      const frame = context.createImageData(source.width, source.height);
+      let frame = context.createImageData(source.width, source.height);
       const renderer = createStudioRenderer(target, {
         style: "dots",
-        cellSize: 8,
+        cellSize: 5,
         colorMode: "source",
         backdrop: { mode: "solid", color: "#080809" },
         color: { brightness: 0, contrast: 1, saturation: 1 },
@@ -65,6 +68,8 @@ export function ProductFluidBackground({
 
       let width = 1;
       let height = 1;
+      let viewportHeight = 1;
+      let verticalSpan = 1;
       let field = new FluidField(1, 2.4, true);
       let raf = 0;
       let last = 0;
@@ -74,7 +79,15 @@ export function ProductFluidBackground({
       const canAnimate = () => running.current && !document.hidden && !reduced.matches;
 
       const paint = () => {
-        paintLiquidSource(frame.data, source.width, source.height, width / height, time, field);
+        const current = currentPalette.current;
+        const targetColors = targetPalette.current;
+        for (let band = 0; band < current.length; band++) {
+          for (let channel = 0; channel < 3; channel++) {
+            current[band][channel] += (targetColors[band][channel] - current[band][channel]) * .045;
+          }
+        }
+        const [low, high] = current;
+        paintLiquidSource(frame.data, source.width, source.height, width / viewportHeight, time, field, verticalSpan, .22);
         for (let i = 0; i < frame.data.length; i += 4) {
           const light = Math.min(1, Math.pow(frame.data[i] / 255, .86));
           const mix = Math.min(1, Math.max(0, (light - .15) / .65));
@@ -118,24 +131,16 @@ export function ProductFluidBackground({
         const rect = element.getBoundingClientRect();
         width = Math.max(1, Math.round(rect.width));
         height = Math.max(1, Math.round(rect.height));
-        field = new FluidField(width / height, 2.4, true);
+        viewportHeight = Math.max(1, Math.min(height, window.innerHeight));
+        verticalSpan = Math.max(1, height / viewportHeight);
+        source.height = Math.min(960, Math.max(240, Math.round(source.width * height / width)));
+        frame = context.createImageData(source.width, source.height);
+        field = new FluidField(width / viewportHeight, 2.4, true);
         sync();
       };
 
-      const surface = element.closest("article")!;
-      const pointer = (event: PointerEvent) => {
-        if (!canAnimate() || event.pointerType === "touch") return;
-        const rect = element.getBoundingClientRect();
-        field.move(
-          (event.clientX - rect.left) / rect.width,
-          (event.clientY - rect.top) / rect.height,
-        );
-      };
-      const leave = () => field.leave();
       const observer = new ResizeObserver(resize);
       observer.observe(element);
-      surface.addEventListener("pointermove", pointer);
-      surface.addEventListener("pointerleave", leave);
       document.addEventListener("visibilitychange", sync);
       reduced.addEventListener("change", sync);
       wake.current = sync;
@@ -146,8 +151,6 @@ export function ProductFluidBackground({
         observer.disconnect();
         renderer.destroy();
         wake.current = null;
-        surface.removeEventListener("pointermove", pointer);
-        surface.removeEventListener("pointerleave", leave);
         document.removeEventListener("visibilitychange", sync);
         reduced.removeEventListener("change", sync);
       };
@@ -164,7 +167,7 @@ export function ProductFluidBackground({
       disposed = true;
       cleanup();
     };
-  }, [visited, palette, phase]);
+  }, [visited, phase]);
 
   return <div ref={host} className="product-fluid" data-ready={ready} aria-hidden="true">
     <canvas ref={canvas} />

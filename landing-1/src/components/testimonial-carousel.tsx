@@ -6,7 +6,7 @@ import { SignalField } from "./signal-field";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-const testimonials = [
+const testimonialsEn = [
   {
     quote: "Novaim helped us move from scattered AI experiments to a system our teams can use every day.",
     name: "Maya Chen",
@@ -33,7 +33,14 @@ const testimonials = [
   },
 ];
 
-export function TestimonialCarousel() {
+const testimonialsEs = [
+  { ...testimonialsEn[0], quote: "Novaim nos ayudó a pasar de experimentos de IA dispersos a un sistema que nuestros equipos pueden usar todos los días.", role: "Directora de Operaciones" },
+  { ...testimonialsEn[1], quote: "Primero entendieron la realidad operativa y luego construyeron agentes que encajan de forma natural en cómo trabaja nuestra gente.", role: "Director de Producto" },
+  { ...testimonialsEn[2], quote: "Lo que comenzó como un flujo específico se convirtió en una base que podemos ampliar a toda la organización.", role: "Líder de Transformación" },
+];
+
+export function TestimonialCarousel({ language }: { language: "en" | "es" }) {
+  const testimonials = language === "en" ? testimonialsEn : testimonialsEs;
   const [active, setActive] = useState(0);
   const dragStart = useRef<number | null>(null);
 
@@ -55,7 +62,7 @@ export function TestimonialCarousel() {
         className="testimonial-stage"
         role="region"
         aria-roledescription="carousel"
-        aria-label="Client testimonials. Drag or swipe to browse."
+        aria-label={language === "en" ? "Client testimonials. Drag or swipe to browse." : "Testimonios de clientes. Arrastra o desliza para explorar."}
         tabIndex={0}
         onKeyDown={event => {
           if (event.key === "ArrowLeft") move(-1);

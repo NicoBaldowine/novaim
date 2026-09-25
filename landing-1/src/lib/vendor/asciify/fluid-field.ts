@@ -126,18 +126,22 @@ export class FluidField {
 }
 
 /** Original monochrome liquid source, converted to glyphs by asciify-engine. */
-export function paintLiquidSource(pixels: Uint8ClampedArray, width: number, height: number, aspect: number, time: number, flow: PointerField) {
+export function paintLiquidSource(pixels: Uint8ClampedArray, width: number, height: number, aspect: number, time: number, flow: PointerField, verticalSpan = 1, interactionStrength = 1) {
   const field = [0, 0, 0], moving = flow.active;
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const u = x / width, v = y / height;
     if (moving) flow.sample(u, v, field);
-    const px = (u - .5 - field[0]) * aspect, py = v - .5 - field[1];
+    // Keep the pattern at viewport scale even when it is painted across a long,
+    // scrolling surface. This creates one continuous field without stretching
+    // the original fluid linework into a tall, uniform gradient.
+    const px = (u - .5 - field[0] * interactionStrength) * aspect;
+    const py = (v - .5 - field[1] * interactionStrength) * verticalSpan;
     const qx = px + .22 * Math.sin(py * 5.2 + time * .17) + .15 * Math.sin(px * 2.4 - py * 3.1 - time * .1);
     const qy = py + .19 * Math.sin(px * 3.5 + time * .13);
     const radius = Math.hypot(qx * .8 + .18, qy * 1.1);
     const folds = .5 + .5 * Math.sin(radius * 14 - qx * 2.8 + Math.sin(qy * 5) * 1.4 - time * .24);
     const cloud = .5 + .5 * Math.sin(qx * 3.6 - qy * 2.9 + time * .09);
-    const light = Math.max(0, Math.min(1, folds * folds * (.48 + cloud * .32) - .075 + field[2] * .75));
+    const light = Math.max(0, Math.min(1, folds * folds * (.48 + cloud * .32) - .075 + field[2] * .75 * interactionStrength));
     const value = Math.round(light * 255), i = (y * width + x) * 4;
     pixels[i] = pixels[i + 1] = pixels[i + 2] = value; pixels[i + 3] = 255;
   }
