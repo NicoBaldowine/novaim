@@ -67,8 +67,11 @@ export default function Landing() {
   const [language, setLanguage] = useState<"en" | "es">("en");
 
   useEffect(() => {
-    const saved = window.localStorage.getItem("novaim-language");
-    if (saved === "en" || saved === "es") setLanguage(saved);
+    const timer = window.setTimeout(() => {
+      const saved = window.localStorage.getItem("novaim-language");
+      if (saved === "en" || saved === "es") setLanguage(saved);
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   const changeLanguage = (next: "en" | "es") => {
@@ -130,12 +133,12 @@ export default function Landing() {
           <span>© novaim {new Date().getFullYear()}</span>
           <div className="footer-socials" aria-label="Social platforms">
             {[
-              ["LinkedIn", "social-linkedin.svg"],
-              ["Instagram", "social-instagram.svg"],
-              ["Discord", "social-discord.svg"],
-              ["Claude", "social-claude.svg"],
-              ["ChatGPT", "social-openai.svg"],
-            ].map(([name, file]) => <span key={name} title={name}><Image src={`${basePath}/${file}`} width={18} height={18} alt={name} /></span>)}
+              ["LinkedIn", "social-linkedin.svg", "https://www.linkedin.com/"],
+              ["Instagram", "social-instagram.svg", "https://www.instagram.com/"],
+              ["Discord", "social-discord.svg", "https://discord.com/"],
+              ["Claude", "social-claude.svg", "https://claude.ai/"],
+              ["ChatGPT", "social-openai.svg", "https://chatgpt.com/"],
+            ].map(([name, file, href]) => <a key={name} href={href} target="_blank" rel="noreferrer" title={name} aria-label={name}><Image src={`${basePath}/${file}`} width={18} height={18} alt="" /></a>)}
           </div>
         </div>
       </div>

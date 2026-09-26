@@ -1,38 +1,46 @@
 # NovaIM
 
-Animated brand presentations for NovaIM.
+NovaIM’s design explorations and production landing page live in this repository as three independent Next.js applications.
 
-## Branding 1
+## Projects
 
-Source: `branding-1/`.
+| App | Source | Production route | Purpose |
+| --- | --- | --- | --- |
+| Branding 1 | `branding-1/` | `/branding1/` | Primary brand identity presentation |
+| Branding 2 | `branding-2/` | `/branding2/` | Alternate brand direction and motion studies |
+| Landing 1 | `landing-1/` | `/landing1/` | Bilingual NovaIM marketing site |
 
-Published at https://nicobaldowine.github.io/novaim/branding-1/.
-
-## Branding 2
-
-Source: `branding-2/`.
-
-Published at https://nicobaldowine.github.io/novaim/branding-2/.
-
-
-### Development
+Each app owns its dependencies and scripts. Install and run the app you are working on from its directory:
 
 ```sh
-cd branding-2
+cd landing-1
 npm ci
-npm run dev
+npm run dev -- --port 3003
 ```
 
-### Publish
+## Quality checks
 
-Push to `main` to deploy through GitHub Pages. The build exports the presentation under `/branding-1` and `/branding-2`, with assets scoped to that path. To build for a domain root rather than the GitHub project prefix, use `SITE_PREFIX='' node scripts/build-site.mjs`.
+Run these commands inside the app you changed:
 
-## Vercel
+```sh
+npm run lint
+npm run build
+```
 
-Import this repository with the Root Directory left empty and the Other framework preset. The root `vercel.json` builds both presentations into `site/`, exposed at `/branding-1/` and `/branding-2/`. The homepage redirects to `/branding-1/`.
+The landing includes English and Spanish content, responsive navigation, animated dotted surfaces, product sections, testimonials and a contact form.
 
-## Landing 1
+## Production build
 
-Source: `landing-1/`. A hero-only landing with the lowercase novaim logo, Zalando Sans, an animated particle sphere and placeholder sections.
+The root build script exports all three apps into `site/`:
 
-Run `cd landing-1 && npm ci && npm run dev -- --port 3003` for local development. The shared build includes `/landing1/` on Vercel and `/novaim/landing-1/` on GitHub Pages.
+```sh
+node scripts/build-site.mjs
+```
+
+`SITE_PREFIX` controls the public path prefix and defaults to `/novaim`. Vercel uses compact routes such as `/landing1/`; GitHub Pages uses routes such as `/novaim/landing-1/`.
+
+## Deployment
+
+Vercel should import the repository with the root directory left empty and use the configuration in `vercel.json`. The public landing is available at [novaim-branding.vercel.app/landing1](https://novaim-branding.vercel.app/landing1/).
+
+Pushing to `main` also triggers the GitHub Pages workflow in `.github/workflows/`.

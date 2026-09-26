@@ -52,7 +52,7 @@ export function TestimonialCarousel({ language }: { language: "en" | "es" }) {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const timer = window.setInterval(() => setActive(value => (value + 1) % testimonials.length), 6500);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [testimonials.length]);
 
   const testimonial = testimonials[active];
   return <>

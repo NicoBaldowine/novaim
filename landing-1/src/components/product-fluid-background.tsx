@@ -18,9 +18,9 @@ export function ProductFluidBackground({
   const canvas = useRef<HTMLCanvasElement>(null);
   const running = useRef(active);
   const wake = useRef<(() => void) | null>(null);
+  const initialColors = useRef(colors);
   const targetPalette = useRef(colors.slice(1, 3).map(rgb));
   const currentPalette = useRef(colors.slice(1, 3).map(rgb));
-  const [visited, setVisited] = useState(active);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -29,12 +29,11 @@ export function ProductFluidBackground({
 
   useEffect(() => {
     running.current = active;
-    if (active) setVisited(true);
     wake.current?.();
   }, [active]);
 
   useEffect(() => {
-    if (!visited || !canvas.current || !host.current) return;
+    if (!canvas.current || !host.current) return;
     const element = host.current;
     const target = canvas.current;
     let disposed = false;
@@ -43,7 +42,7 @@ export function ProductFluidBackground({
     async function mount() {
       const { createStudioRenderer } = await import("asciify-engine/studio");
       if (disposed) return;
-      const selected = colors;
+      const selected = initialColors.current;
       const source = document.createElement("canvas");
       source.width = 320;
       source.height = 240;
@@ -167,7 +166,7 @@ export function ProductFluidBackground({
       disposed = true;
       cleanup();
     };
-  }, [visited, phase]);
+  }, [phase]);
 
   return <div ref={host} className="product-fluid" data-ready={ready} aria-hidden="true">
     <canvas ref={canvas} />

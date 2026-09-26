@@ -46,15 +46,6 @@ function ProductScene({ product, index, onActive, visitLabel }: { product: Produ
   return <article
     ref={scene}
     className={`product-scene ${product.tone}${index % 2 === 1 ? " product-scene-reverse" : ""}`}
-    onPointerMove={(event) => {
-      const bounds = event.currentTarget.getBoundingClientRect();
-      event.currentTarget.style.setProperty("--pointer-x", `${((event.clientX - bounds.left) / bounds.width - .5) * 34}px`);
-      event.currentTarget.style.setProperty("--pointer-y", `${((event.clientY - bounds.top) / bounds.height - .5) * 26}px`);
-    }}
-    onPointerLeave={(event) => {
-      event.currentTarget.style.setProperty("--pointer-x", "0px");
-      event.currentTarget.style.setProperty("--pointer-y", "0px");
-    }}
   >
     <div className="product-panel-inner">
       <div className="product-content">
