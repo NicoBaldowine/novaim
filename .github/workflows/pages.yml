@@ -26,9 +26,11 @@ jobs:
             branding-1/package-lock.json
             branding-2/package-lock.json
             landing-1/package-lock.json
+            broki/package-lock.json
       - run: npm ci --prefix branding-1
       - run: npm ci --prefix branding-2
       - run: npm ci --prefix landing-1
+      - run: npm ci --prefix broki
       - uses: actions/configure-pages@v5
       - run: node scripts/build-site.mjs
       - uses: actions/upload-pages-artifact@v3
