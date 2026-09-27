@@ -1,0 +1,77 @@
+:root {
+  /* Typography */
+  --font-family-sans: var(--font-zalando-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-family-utility: var(--font-zalando-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-family-numeric: var(--font-instrument), "Helvetica Neue", Arial, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --tracking-default: -0.02em;
+
+  --text-display-size: 2.5rem;
+  --text-display-line: 1.05;
+  --text-display-tracking: -0.04em;
+  --text-title-size: 2rem;
+  --text-title-line: 1.15;
+  --text-title-tracking: -0.04em;
+  --text-heading-size: 1.125rem;
+  --text-heading-line: 1.333;
+  --text-heading-tracking: -0.02em;
+  --text-metric-size: 1.5rem;
+  --text-metric-line: 1.2;
+  --text-metric-tracking: -0.02em;
+  --text-body-lg-size: 1rem;
+  --text-body-lg-line: 1.5;
+  --text-body-lg-tracking: -0.02em;
+  --text-body-size: 0.875rem;
+  --text-body-line: 1.5;
+  --text-body-tracking: -0.02em;
+  --text-meta-size: 0.75rem;
+  --text-meta-line: 1.5;
+  --text-meta-tracking: -0.02em;
+  --text-eyebrow-size: 0.75rem;
+  --text-eyebrow-line: 1.4;
+  --text-eyebrow-tracking: 0.14em;
+  --text-card-title-size: 1.125rem;
+  --text-card-title-line: 1.333;
+  --text-card-title-tracking: -0.02em;
+  --text-card-price-size: 1.5rem;
+  --text-card-price-line: 1.2;
+  --text-card-price-tracking: -0.02em;
+  --text-card-price-label-size: 0.75rem;
+  --text-card-price-label-line: 1.2;
+  --text-card-meta-size: 0.8125rem;
+  --text-card-meta-line: 1.35;
+  --text-utility-size: 0.75rem;
+  --text-utility-line: 1.333;
+  --text-utility-tracking: -0.02em;
+
+  /* Neutral colors */
+  --color-ink-950: #11120f;
+  --color-ink-700: #363833;
+  --color-ink-500: #73766f;
+  --color-ink-400: #8c8f89;
+  --color-ink-300: #b9bcb6;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f7f8f6;
+  --color-surface-hover: #f4f7f3;
+  --color-border: #e5e7e2;
+  --color-border-strong: #d9ddd6;
+
+  /* Brand colors */
+  --color-brand-100: #abe5bd;
+  --color-brand-200: #9eddb1;
+  --color-brand-700: #257245;
+  --color-brand-900: #174f2e;
+  --color-brand-surface: #f4fcf6;
+  --color-accent-pink: #ffdbe5;
+  --color-accent-pink-ink: #62283a;
+
+  /* Semantic aliases */
+  --ink: var(--color-ink-950);
+  --muted: var(--color-ink-500);
+  --soft: var(--color-surface-subtle);
+  --line: var(--color-border);
+  --green: var(--color-brand-100);
+  --green-dark: var(--color-brand-900);
+  --pink: var(--color-accent-pink);
+}

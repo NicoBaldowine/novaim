@@ -1,0 +1,115 @@
+.page { min-height: 100vh; background: var(--color-surface); color: var(--color-ink-950); }
+.header { height: 76px; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(24px, 5vw, 72px); border-bottom: 1px solid var(--color-border); }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: var(--font-weight-medium); }
+.brandMark { width: 35px; height: 35px; }
+.backLink { display: inline-flex; align-items: center; gap: 8px; color: var(--color-ink-700); text-decoration: none; font-size: var(--text-body-size); font-weight: var(--font-weight-medium); }
+.backLink:hover { color: var(--color-brand-900); }
+.content { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: 80px 0 110px; }
+.intro { max-width: 700px; margin-bottom: 94px; }
+.overline { margin: 0 0 17px; color: var(--color-brand-700); font-size: var(--text-eyebrow-size); line-height: var(--text-eyebrow-line); font-weight: var(--font-weight-medium); letter-spacing: var(--text-eyebrow-tracking); }
+.intro h1 { margin: 0; font-size: clamp(42px, 6.2vw, 72px); line-height: .98; font-weight: var(--font-weight-regular); letter-spacing: var(--text-display-tracking); }
+.intro > p:last-child { max-width: 610px; margin: 24px 0 0; color: var(--color-ink-500); font-size: 18px; line-height: 1.55; }
+.section { padding: 38px 0 72px; border-top: 1px solid var(--color-border); }
+.sectionHeading { display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; margin-bottom: 36px; }
+.sectionHeading > div { display: flex; align-items: baseline; gap: 16px; }
+.sectionHeading span { color: var(--color-ink-400); font-size: var(--text-meta-size); }
+.sectionHeading h2 { margin: 0; font-size: var(--text-title-size); line-height: var(--text-title-line); font-weight: var(--font-weight-regular); letter-spacing: var(--text-title-tracking); }
+.sectionHeading p { max-width: 420px; margin: 7px 0 0; color: var(--color-ink-500); font-size: var(--text-body-size); line-height: var(--text-body-line); text-align: right; }
+.typeTable { border-top: 1px solid var(--color-border); }
+.typeRow { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 30px; align-items: center; min-height: 112px; padding: 24px 0; border-bottom: 1px solid var(--color-border); }
+.typeMeta { display: flex; flex-direction: column; gap: 7px; }
+.typeMeta strong { font-size: var(--text-body-size); font-weight: var(--font-weight-medium); }
+.typeMeta code, .colorCard code { color: var(--color-ink-400); font: inherit; font-size: var(--text-meta-size); }
+.typeRow p { margin: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.display { font-size: var(--text-display-size); line-height: var(--text-display-line); letter-spacing: var(--text-display-tracking); font-weight: var(--font-weight-regular); }
+.title { font-size: var(--text-title-size); line-height: var(--text-title-line); letter-spacing: var(--text-title-tracking); font-weight: var(--font-weight-regular); }
+.heading { font-size: var(--text-heading-size); line-height: var(--text-heading-line); letter-spacing: var(--text-heading-tracking); font-weight: var(--font-weight-regular); }
+.cardTitle { font-size: var(--text-card-title-size); line-height: var(--text-card-title-line); letter-spacing: var(--text-card-title-tracking); font-weight: var(--font-weight-medium); }
+.cardPrice { display: flex; flex-direction: column; align-items: flex-start; gap: 0; color: var(--color-ink-500); }
+.cardPrice span { font-family: var(--font-family-utility); font-size: var(--text-card-price-label-size); line-height: var(--text-card-price-label-line); letter-spacing: var(--text-utility-tracking); font-weight: var(--font-weight-regular); }
+.cardPrice strong { color: var(--color-ink-950); font-family: var(--font-family-numeric); font-size: var(--text-card-price-size); line-height: var(--text-card-price-line); letter-spacing: var(--text-card-price-tracking); word-spacing: -0.08em; font-weight: var(--font-weight-regular); }
+.metric { font-size: var(--text-metric-size); line-height: var(--text-metric-line); letter-spacing: var(--text-metric-tracking); font-weight: var(--font-weight-regular); }
+.bodyLarge { font-size: var(--text-body-lg-size); line-height: var(--text-body-lg-line); letter-spacing: var(--text-body-lg-tracking); font-weight: var(--font-weight-regular); }
+.body { font-size: var(--text-body-size); line-height: var(--text-body-line); letter-spacing: var(--text-body-tracking); font-weight: var(--font-weight-regular); }
+.label { font-size: var(--text-body-size); line-height: var(--text-body-line); letter-spacing: var(--text-body-tracking); font-weight: var(--font-weight-medium); }
+.meta { font-size: var(--text-meta-size); line-height: var(--text-meta-line); letter-spacing: var(--text-meta-tracking); font-weight: var(--font-weight-regular); }
+.utility { font-family: var(--font-family-utility); font-size: var(--text-utility-size); line-height: var(--text-utility-line); letter-spacing: var(--text-utility-tracking); font-weight: var(--font-weight-regular); }
+.eyebrow { font-size: var(--text-eyebrow-size); line-height: var(--text-eyebrow-line); letter-spacing: var(--text-eyebrow-tracking); font-weight: var(--font-weight-medium); text-transform: uppercase; }
+.colorGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 18px; }
+.colorCard { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; }
+.swatch { grid-column: 1 / -1; height: 122px; margin-bottom: 10px; border: 1px solid rgba(17,18,15,.08); border-radius: 12px; }
+.colorCard strong { font-size: var(--text-body-size); font-weight: var(--font-weight-medium); }
+.colorCard > span { color: var(--color-ink-500); font-size: var(--text-meta-size); text-align: right; }
+.colorCard code { grid-column: 1 / -1; }
+.iconGrid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); border-top: 1px solid var(--color-border); border-left: 1px solid var(--color-border); }
+.iconCard { min-height: 124px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 13px; border-right: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+.iconCard > div { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 10px; background: var(--color-surface-subtle); color: var(--color-ink-700); }
+.iconCard > span { color: var(--color-ink-500); font-size: 11px; line-height: 1.3; text-align: center; }
+.iconRules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 25px; }
+.iconRules > div { display: flex; align-items: flex-start; gap: 9px; color: var(--color-ink-500); font-size: var(--text-body-size); line-height: var(--text-body-line); }
+.iconRules svg { flex: 0 0 auto; margin-top: 2px; color: var(--color-brand-700); }
+.componentStack { display: grid; gap: 18px; }
+.componentGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.componentBlock { min-width: 0; overflow: hidden; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); }
+.componentTitle { min-height: 76px; display: flex; align-items: flex-start; justify-content: space-between; gap: 22px; padding: 17px 20px; border-bottom: 1px solid var(--color-border); }
+.componentTitle h3 { margin: 0; font-size: var(--text-body-size); line-height: var(--text-body-line); font-weight: var(--font-weight-medium); }
+.componentTitle p { max-width: 330px; margin: 0; color: var(--color-ink-500); font-size: var(--text-meta-size); line-height: var(--text-meta-line); text-align: right; }
+.componentRow { min-height: 126px; display: flex; align-items: center; flex-wrap: wrap; gap: 16px; padding: 28px; background: var(--color-surface-subtle); }
+.catalogToolbar { min-height: 126px; margin: 0; padding: 26px 22px; border-bottom: 0; background: var(--color-surface-subtle); }
+.noticePreview { min-height: 126px; display: flex; align-items: center; padding: 28px; background: var(--color-surface-subtle); }
+.noticePreview p { margin: 0; }
+.tagPreview { min-height: 126px; display: flex; align-items: center; flex-wrap: wrap; gap: 9px; padding: 28px; background: var(--color-surface-subtle); }
+.cardAnatomy { display: flex; flex-wrap: wrap; gap: 8px; margin: -8px 0 28px; }
+.cardAnatomy span { padding: 6px 9px; border: 1px solid var(--color-border); border-radius: 999px; color: var(--color-ink-500); font-size: 11px; line-height: 1.2; }
+.cardGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.sidebarShowcase { display: grid; grid-template-columns: 232px minmax(0, 1fr); gap: 18px; align-items: start; padding: 18px; border-radius: 18px; background: var(--color-surface-subtle); }
+.sidebarItemPreview { min-height: 300px; display: grid; align-content: start; gap: 24px; padding: 28px; background: var(--color-surface-subtle); }
+.sidebarItemPreview > div { width: min(280px, 100%); }
+.sidebarItemPreview > div > span { display: block; margin: 0 0 8px 10px; color: var(--color-ink-400); font-family: var(--font-family-utility); font-size: 10px; line-height: 1.4; font-weight: var(--font-weight-medium); letter-spacing: .12em; text-transform: uppercase; }
+.primaryButton, .secondaryButton, .selectedState { height: 44px; display: inline-flex; align-items: center; gap: 8px; padding: 0 15px; border-radius: 10px; font-family: var(--font-family-utility); font-size: var(--text-card-meta-size); font-weight: var(--font-weight-medium); transition: border-color .18s ease, background-color .18s ease, box-shadow .18s ease; }
+.primaryButton { border: 1px solid var(--color-brand-900); background: var(--color-brand-900); color: #fff; box-shadow: 0 1px 2px rgba(17,18,15,.12), 0 4px 10px rgba(23,79,46,.12); }
+.secondaryButton { border: 1px solid #dfe2dc; background: #fff; color: var(--color-ink-950); box-shadow: 0 1px 2px rgba(17,18,15,.035); }
+.selectedState { border: 1px solid #c7e7d1; background: #e7f6eb; color: var(--color-brand-900); }
+.promoTag, .discountTag { padding: 7px 11px; border-radius: 999px; font-size: var(--text-meta-size); font-weight: var(--font-weight-medium); }
+.promoTag { background: var(--color-brand-100); color: var(--color-brand-900); }
+.discountTag { background: var(--color-accent-pink); color: var(--color-accent-pink-ink); }
+
+@media (max-width: 900px) {
+  .iconGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .iconRules { grid-template-columns: 1fr; }
+  .componentGrid { grid-template-columns: 1fr; }
+  .catalogToolbar { align-items: flex-start; flex-direction: column; }
+  .catalogToolbar :global(.viewControls) { width: 100%; justify-content: space-between; }
+  .cardGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sidebarShowcase { grid-template-columns: 232px minmax(0, 1fr); }
+}
+
+@media (max-width: 680px) {
+  .header { height: 66px; padding: 0 18px; }
+  .brand { font-size: 21px; }
+  .brandMark { width: 31px; height: 31px; }
+  .backLink { font-size: 0; gap: 0; }
+  .content { width: calc(100% - 36px); padding: 54px 0 80px; }
+  .intro { margin-bottom: 66px; }
+  .intro h1 { font-size: 44px; }
+  .intro > p:last-child { font-size: 16px; }
+  .sectionHeading { flex-direction: column; gap: 6px; }
+  .sectionHeading p { margin-left: 34px; text-align: left; }
+  .typeRow { grid-template-columns: 1fr; gap: 15px; min-height: 0; }
+  .typeRow p { white-space: normal; }
+  .display { font-size: 34px; }
+  .colorGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .swatch { height: 98px; }
+  .iconGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .iconCard { min-height: 108px; }
+  .componentRow { align-items: flex-start; flex-direction: column; }
+  .componentTitle { flex-direction: column; gap: 3px; }
+  .componentTitle p { text-align: left; }
+  .catalogToolbar :global(.filterGroup), .catalogToolbar :global(.viewControls) { width: 100%; align-items: stretch; flex-direction: column; }
+  .catalogToolbar :global(.segmented) { width: 100%; }
+  .catalogToolbar :global(.segmented button) { flex: 1; justify-content: center; }
+  .catalogToolbar :global(.sortControl) { width: 100%; justify-content: space-between; }
+  .catalogToolbar :global(.sortControl select) { flex: 1; width: auto; }
+  .cardGrid { grid-template-columns: 1fr; }
+  .sidebarShowcase { grid-template-columns: 1fr; }
+}
