@@ -17,7 +17,7 @@ async function rewrite(dir, base, originals) {
     if (entry.isDirectory()) await rewrite(file, base, originals);
     else if (/\.(tsx?|css|jsx?)$/.test(file)) {
       const text = await readFile(file, 'utf8');
-      const updated = text.replace(/(["'`])\/(media\/|mockups\/|layer-mark\.svg|orbital-mark\.png)/g, `$1${base}/$2`);
+      const updated = text.replace(/(["'`])\/(media\/|mockups\/|projects\/|layer-mark\.svg|orbital-mark\.png|broki-diagonal\.svg)/g, `$1${base}/$2`);
       if (text !== updated) {
         originals.set(file, text);
         await writeFile(file, updated);
