@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Icon, type IconName } from "./icon";
 
 export type SidebarItemProps = {
@@ -7,10 +8,26 @@ export type SidebarItemProps = {
   label: string;
   active?: boolean;
   disabled?: boolean;
+  href?: string;
   onSelect?: () => void;
 };
 
-export function SidebarItem({ icon, label, active = false, disabled = false, onSelect }: SidebarItemProps) {
+export function SidebarItem({ icon, label, active = false, disabled = false, href, onSelect }: SidebarItemProps) {
+  const content = <><Icon name={icon} size={15}/><span>{label}</span></>;
+
+  if (href && !disabled) {
+    return (
+      <Link
+        href={href}
+        className={`navItem ${active ? "navItemActive" : ""}`}
+        onClick={onSelect}
+        aria-current={active ? "page" : undefined}
+      >
+        {content}
+      </Link>
+    );
+  }
+
   return (
     <button
       type="button"
@@ -19,22 +36,22 @@ export function SidebarItem({ icon, label, active = false, disabled = false, onS
       disabled={disabled}
       aria-current={active ? "page" : undefined}
     >
-      <Icon name={icon} size={15}/><span>{label}</span>
+      {content}
     </button>
   );
 }
 
 type SidebarSection = {
   label: string;
-  items: Array<{ icon: IconName; label: string }>;
+  items: Array<{ icon: IconName; label: string; href?: string }>;
 };
 
 export const sidebarSections: SidebarSection[] = [
-  { label: "CATÁLOGO", items: [{ icon: "building", label: "Proyectos" }] },
+  { label: "CATÁLOGO", items: [{ icon: "building", label: "Proyectos", href: "/" }] },
   {
     label: "GESTIÓN",
     items: [
-      { icon: "users", label: "Leads / Setter" },
+      { icon: "users", label: "Leads / Setter", href: "/leads" },
       { icon: "calendar", label: "Agenda" },
       { icon: "columns", label: "Pipeline" },
       { icon: "users", label: "Clientes" },
@@ -65,20 +82,21 @@ function SidebarBrand() {
   );
 }
 
-export function Sidebar({ open = false, onClose, preview = false }: { open?: boolean; onClose?: () => void; preview?: boolean }) {
+export function Sidebar({ open = false, onClose, preview = false, activePath = "/" }: { open?: boolean; onClose?: () => void; preview?: boolean; activePath?: string }) {
   return (
     <aside className={`sidebar ${open ? "sidebarOpen" : ""} ${preview ? "sidebarPreview" : ""}`}>
       <div className="mobileSidebarHeader"><SidebarBrand/><button className="iconButton" onClick={onClose} aria-label="Cerrar menú"><Icon name="x"/></button></div>
       <nav aria-label="Navegación principal">
-        {sidebarSections.map((section, sectionIndex) => (
+        {sidebarSections.map((section) => (
           <section className="navSection" key={section.label}>
             <h2>{section.label}</h2>
-            {section.items.map((item, itemIndex) => (
+            {section.items.map((item) => (
               <SidebarItem
                 key={`${section.label}-${item.label}`}
                 icon={item.icon}
                 label={item.label}
-                active={sectionIndex === 0 && itemIndex === 0}
+                href={item.href}
+                active={item.href === activePath}
                 onSelect={onClose}
               />
             ))}

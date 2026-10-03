@@ -34,6 +34,7 @@ button { color: inherit; }
 .navSection + .navSection { padding-top: 18px; border-top: 1px solid #eceeea; }
 .navSection h2 { margin: 0 10px 9px; color: #a0a49d; font-family: var(--font-family-utility); font-size: 0.625rem; line-height: 1.4; font-weight: var(--font-weight-regular); letter-spacing: .12em; }
 .navItem { width: 100%; min-height: 36px; display: flex; align-items: center; gap: 10px; padding: 7px 10px; margin: 0; border: 1px solid transparent; border-radius: 9px; background: transparent; color: var(--color-ink-500); font-family: var(--font-family-utility); font-size: var(--text-card-meta-size); line-height: var(--text-card-meta-line); letter-spacing: var(--text-utility-tracking); text-align: left; cursor: pointer; transition: color .18s ease, border-color .18s ease, background-color .18s ease, box-shadow .18s ease; }
+.navItem { text-decoration: none; }
 .navItem:hover { color: var(--ink); background: #f1f3ef; }
 .navItem svg { flex: 0 0 auto; }
 .navItemActive { border-color: transparent; background: #eceeea; color: var(--color-ink-950); font-weight: var(--font-weight-regular); box-shadow: none; }
@@ -71,16 +72,25 @@ h1 { margin: 0; font-family: var(--font-family-sans); font-size: var(--text-metr
 .filterDrawerTriggerActive { border-color: #b7dec4; background: #edf8f0; color: var(--color-brand-900); }
 
 .controlMenu { position: relative; }
-.controlTrigger { height: 44px; display: flex; align-items: center; gap: 8px; padding: 0 11px 0 13px; border: 1px solid #dfe2dc; border-radius: 10px; background: rgba(255,255,255,.96); color: var(--color-ink-700); box-shadow: 0 1px 2px rgba(17,18,15,.035); cursor: pointer; transition: color .18s ease, border-color .18s ease, background-color .18s ease, box-shadow .18s ease; }
-.controlTrigger:hover { border-color: #cfd3cc; background: #fff; color: var(--color-ink-950); box-shadow: 0 2px 5px rgba(17,18,15,.055); }
+.controlTrigger, .actionButton { height: 44px; display: flex; align-items: center; gap: 8px; padding: 0 11px 0 13px; border: 1px solid #dfe2dc; border-radius: 10px; background: rgba(255,255,255,.96); color: var(--color-ink-700); box-shadow: 0 1px 2px rgba(17,18,15,.035); cursor: pointer; transition: color .18s ease, border-color .18s ease, background-color .18s ease, box-shadow .18s ease; }
+.controlTrigger:hover, .actionButton:hover { border-color: #cfd3cc; background: #fff; color: var(--color-ink-950); box-shadow: 0 2px 5px rgba(17,18,15,.055); }
+.actionButtonPrimary { border-color: var(--color-brand-900); background: var(--color-brand-900); color: #fff; box-shadow: 0 1px 2px rgba(17,18,15,.12), 0 4px 10px rgba(23,79,46,.1); }
+.actionButtonPrimary:hover { border-color: #103d23; background: #103d23; color: #fff; box-shadow: 0 3px 9px rgba(23,79,46,.18); }
+.actionButton.actionButtonCompact { height: 32px; justify-content: center; padding: 0 9px; border-radius: 8px; font-size: var(--text-meta-size); line-height: var(--text-meta-line); }
+.actionButton:disabled, .controlTrigger:disabled { border-color: var(--color-border); background: var(--color-surface-subtle); color: var(--color-ink-300); box-shadow: none; cursor: not-allowed; }
 .controlTrigger[aria-expanded="true"] { border-color: #9bcfac; background: #fff; box-shadow: 0 0 0 3px rgba(171,229,189,.26); }
-.controlTrigger > svg:first-child { width: 16px; height: 16px; }
-.controlTrigger > span { white-space: nowrap; }
+.controlTrigger > svg:first-child, .actionButton > svg { width: 16px; height: 16px; }
+.controlTrigger > span, .actionButton > span { white-space: nowrap; }
 .controlChevron { width: 15px; height: 15px; margin-left: 2px; color: var(--color-ink-400); transition: transform .18s ease; }
 .controlTrigger[aria-expanded="true"] .controlChevron { transform: rotate(180deg); }
 .controlTriggerActive { border-color: #b7dec4; background: #edf8f0; color: var(--color-brand-900); }
+.controlMenuCompact { width: 100%; }
+.controlTrigger.controlTriggerCompact { width: 100%; height: 32px; justify-content: space-between; padding: 0 8px 0 10px; border-radius: 8px; font-size: var(--text-meta-size); line-height: var(--text-meta-line); }
+.controlTriggerCompact .controlChevron { margin-left: auto; }
 .controlBadge { width: 20px; height: 20px; display: grid; place-items: center; border-radius: 50%; background: var(--green-dark); color: #fff; font-size: 11px; font-weight: var(--font-weight-medium); }
 .controlPopover { position: absolute; z-index: 20; top: 51px; left: 0; width: 255px; padding: 8px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); box-shadow: 0 18px 45px rgba(17,18,15,.13); animation: controlMenuIn .16s ease-out; }
+.controlPopoverCompact { top: 37px; width: 100%; min-width: 190px; padding: 6px; border-radius: 10px; }
+.controlPopoverCompact .controlOptions button { min-height: 34px; font-size: var(--text-meta-size); }
 .controlMenuHeader { min-height: 38px; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; }
 .controlMenuHeader strong { font-size: var(--text-body-size); font-weight: var(--font-weight-medium); }
 .controlMenuHeader button { padding: 4px; border: 0; background: transparent; color: var(--color-brand-700); font-size: var(--text-meta-size); cursor: pointer; }
@@ -146,9 +156,9 @@ h1 { margin: 0; font-family: var(--font-family-sans); font-size: var(--text-metr
 .segmented button.selected { background: #dff3e5; color: var(--color-brand-900); font-weight: var(--font-weight-regular); }
 .sortControl { display: flex; align-items: center; gap: 9px; color: var(--color-ink-500); white-space: nowrap; }
 .sortControl select { width: auto; min-width: 0; field-sizing: content; height: 44px; appearance: none; padding: 0 34px 0 13px; border: 1px solid #dfe2dc; border-radius: 10px; outline: none; color: var(--ink); background: rgba(255,255,255,.96) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23585b56' stroke-width='1.8'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E") no-repeat right 11px center; box-shadow: 0 1px 2px rgba(17,18,15,.035); cursor: pointer; transition: border-color .18s ease, box-shadow .18s ease; }
-.searchBox input, .outlineButton, .sortControl select, .segmented button, .controlTrigger, .controlChecks label, .controlOptions button { font-family: var(--font-family-utility); font-size: var(--text-body-size); line-height: var(--text-body-line); font-weight: var(--font-weight-regular); letter-spacing: var(--text-body-tracking); }
+.searchBox input, .outlineButton, .sortControl select, .segmented button, .controlTrigger, .actionButton, .controlChecks label, .controlOptions button { font-family: var(--font-family-utility); font-size: var(--text-body-size); line-height: var(--text-body-line); font-weight: var(--font-weight-regular); letter-spacing: var(--text-body-tracking); }
 .sortControl select:hover { border-color: #cfd3cc; box-shadow: 0 2px 5px rgba(17,18,15,.05); }
-.outlineButton:focus-visible, .segmented button:focus-visible, .sortControl select:focus-visible, .controlTrigger:focus-visible, .controlOptions button:focus-visible { outline: 3px solid rgba(37,114,69,.22); outline-offset: 2px; }
+.outlineButton:focus-visible, .segmented button:focus-visible, .sortControl select:focus-visible, .controlTrigger:focus-visible, .actionButton:focus-visible, .controlOptions button:focus-visible { outline: 3px solid rgba(37,114,69,.22); outline-offset: 2px; }
 
 .results { padding-top: 18px; }
 .soldOutNote { margin: 0; color: var(--color-ink-500); font-family: var(--font-family-utility); font-size: var(--text-card-meta-size); line-height: var(--text-card-meta-line); }

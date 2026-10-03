@@ -24,7 +24,7 @@
 .display { font-size: var(--text-display-size); line-height: var(--text-display-line); letter-spacing: var(--text-display-tracking); font-weight: var(--font-weight-regular); }
 .title { font-size: var(--text-title-size); line-height: var(--text-title-line); letter-spacing: var(--text-title-tracking); font-weight: var(--font-weight-regular); }
 .heading { font-size: var(--text-heading-size); line-height: var(--text-heading-line); letter-spacing: var(--text-heading-tracking); font-weight: var(--font-weight-regular); }
-.cardTitle { font-size: var(--text-card-title-size); line-height: var(--text-card-title-line); letter-spacing: var(--text-card-title-tracking); font-weight: var(--font-weight-medium); }
+.cardTitle { font-size: var(--text-card-title-size); line-height: var(--text-card-title-line); letter-spacing: var(--text-card-title-tracking); font-weight: var(--font-weight-regular); }
 .cardPrice { display: flex; flex-direction: column; align-items: flex-start; gap: 0; color: var(--color-ink-500); }
 .cardPrice span { font-family: var(--font-family-utility); font-size: var(--text-card-price-label-size); line-height: var(--text-card-price-label-line); letter-spacing: var(--text-utility-tracking); font-weight: var(--font-weight-regular); }
 .cardPrice strong { color: var(--color-ink-950); font-family: var(--font-family-numeric); font-size: var(--text-card-price-size); line-height: var(--text-card-price-line); letter-spacing: var(--text-card-price-tracking); word-spacing: -0.08em; font-weight: var(--font-weight-regular); }
@@ -55,6 +55,15 @@
 .componentTitle h3 { margin: 0; font-size: var(--text-body-size); line-height: var(--text-body-line); font-weight: var(--font-weight-medium); }
 .componentTitle p { max-width: 330px; margin: 0; color: var(--color-ink-500); font-size: var(--text-meta-size); line-height: var(--text-meta-line); text-align: right; }
 .componentRow { min-height: 126px; display: flex; align-items: center; flex-wrap: wrap; gap: 16px; padding: 28px; background: var(--color-surface-subtle); }
+.crmShowcase { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.compactComponentRow { min-height: 230px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 24px; padding: 28px; background: var(--color-surface-subtle); }
+.compactComponentRow > div { display: grid; justify-items: start; gap: 8px; }
+.compactComponentRow > div > span { color: var(--color-ink-400); font-size: 10px; line-height: 1.4; letter-spacing: .1em; text-transform: uppercase; }
+.dropdownPreview { min-height: 230px; display: flex; align-items: flex-start; justify-content: center; padding: 28px; background: var(--color-surface-subtle); }
+.dropdownPreview > div { width: 210px; }
+.leadCardBlock { grid-column: 1 / -1; }
+.leadCardCanvas { min-height: 310px; display: grid; place-items: center; padding: 28px; background: #eff1ee; }
+.leadCardPreview { width: 286px; }
 .catalogToolbar { min-height: 126px; margin: 0; padding: 26px 22px; border-bottom: 0; background: var(--color-surface-subtle); }
 .noticePreview { min-height: 126px; display: flex; align-items: center; padding: 28px; background: var(--color-surface-subtle); }
 .noticePreview p { margin: 0; }
@@ -78,6 +87,8 @@
   .iconGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .iconRules { grid-template-columns: 1fr; }
   .componentGrid { grid-template-columns: 1fr; }
+  .crmShowcase { grid-template-columns: 1fr; }
+  .leadCardBlock { grid-column: auto; }
   .catalogToolbar { align-items: flex-start; flex-direction: column; }
   .catalogToolbar :global(.viewControls) { width: 100%; justify-content: space-between; }
   .cardGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -103,6 +114,7 @@
   .iconGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .iconCard { min-height: 108px; }
   .componentRow { align-items: flex-start; flex-direction: column; }
+  .compactComponentRow { align-items: flex-start; justify-content: flex-start; }
   .componentTitle { flex-direction: column; gap: 3px; }
   .componentTitle p { text-align: left; }
   .catalogToolbar :global(.filterGroup), .catalogToolbar :global(.viewControls) { width: 100%; align-items: stretch; flex-direction: column; }

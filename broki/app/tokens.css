@@ -3,8 +3,8 @@
   --font-family-sans: var(--font-zalando-sans), "Helvetica Neue", Arial, sans-serif;
   --font-family-utility: var(--font-zalando-sans), "Helvetica Neue", Arial, sans-serif;
   --font-family-numeric: var(--font-instrument), "Helvetica Neue", Arial, sans-serif;
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
+  --font-weight-regular: 300;
+  --font-weight-medium: 400;
   --tracking-default: -0.02em;
 
   --text-display-size: 2.5rem;
