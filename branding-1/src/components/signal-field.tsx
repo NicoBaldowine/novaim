@@ -53,8 +53,8 @@ export function SignalField({ mode = "signals", interactive = false, paused: ext
       ctx.clearRect(0, 0, width, height);
       if (mode === "identity" || animatePalette) {
         const mix = (.5 + .5 * Math.sin(time * .23)) * .8;
-        const mint = [98, 216, 170], lilac = [196, 161, 232];
-        color = `rgb(${mint.map((v, i) => Math.round(v + (lilac[i] - v) * mix)).join(",")})`;
+        const mint = [98, 216, 170], softGreen = [184, 226, 201];
+        color = `rgb(${mint.map((v, i) => Math.round(v + (softGreen[i] - v) * mix)).join(",")})`;
       }
       ctx.fillStyle = color;
       ctx.strokeStyle = color;

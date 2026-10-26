@@ -6,7 +6,7 @@ export function BrandMark({ animated = false }: { animated?: boolean }) {
   return <svg className={`brand-mark${animated ? " animated-mark" : ""}`} viewBox="25.5 0 86 86" aria-hidden="true"><MarkShape /></svg>;
 }
 export function Wordmark({ textOnly = false }: { animated?: boolean; textOnly?: boolean }) {
-  return <span className="wordmark supplied-wordmark" role="img" aria-label="NovaIM"><svg className="supplied-logo" viewBox={textOnly ? "202 20 618 87" : "0 -18 804 122"} aria-hidden="true">
+  return <span className="wordmark supplied-wordmark" role="img" aria-label="Novaim"><svg className="supplied-logo" viewBox={textOnly ? "202 20 618 87" : "0 -18 804 122"} aria-hidden="true">
     {!textOnly && <g data-logo-part="mark"><g transform="translate(-27.4 -17.2) scale(1.4)"><MarkShape /></g></g>}
     <g data-logo-part="type" fill="currentColor" transform={textOnly ? undefined : "translate(-15.48 -20.62)"}><TypeShape /></g>
   </svg></span>;

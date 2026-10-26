@@ -61,8 +61,8 @@ export function BrandPrinciples() {
     reduced.addEventListener("change", resume);
     return () => { observer.disconnect(); cancelAnimationFrame(frame); document.removeEventListener("visibilitychange", resume); reduced.removeEventListener("change", resume); art.removeEventListener("pointermove", move); art.removeEventListener("pointerleave", leave); };
   }, []);
-  return <section ref={section} className="principles section chromatic-wordmark" id="wordmark" aria-label="NovaIM">
-    <svg ref={svg} className="wordmark-window" viewBox="202 20 618 87" role="img" aria-label="NovaIM — a black wordmark with a grid of light dots with automatic illumination that follows the cursor on hover">
+  return <section ref={section} className="principles section chromatic-wordmark" id="wordmark" aria-label="Novaim">
+    <svg ref={svg} className="wordmark-window" viewBox="202 20 618 87" role="img" aria-label="Novaim, a black wordmark with a grid of light dots with automatic illumination that follows the cursor on hover">
       <defs>
         <path className="light-route" d="M209 98 V35 Q209 22 220 29 L282 98 Q297 106 297 91 V29 M374 29 C310 29 310 98 374 98 C439 98 439 29 374 29 M443 29 L481 97 Q488 103 496 96 L534 29 M539 99 L575 32 Q585 20 595 32 L632 99 M553 82 H617 M665 29 V99 M700 99 V36 Q700 20 715 31 L750 96 Q756 105 763 94 L794 33 Q810 18 812 36 V99" />
         <clipPath id={`${id}-letters`}><TypeShape /></clipPath>
